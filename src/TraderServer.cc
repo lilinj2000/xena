@@ -34,6 +34,22 @@ void TraderServer::onRspOrderInsert(int order_ref, bool is_success)
 
   XENA_DEBUG <<"order_ref: " <<order_ref
              <<" success: " <<std::boolalpha <<is_success;
+
+  auto it = records_.find(order_ref);
+
+  if( it!=records_.end() )
+  {
+    it->second->updateT2();
+    
+    timestamp_file_->putData( it->second );
+
+    records_.erase( it );
+  }
+  else
+  {
+    XENA_ERROR <<"unexpected the rtn order, the order ref is " <<order_ref;
+  }
+
 }
 
 void TraderServer::onErrRtnOrderInsert(int order_ref)
@@ -41,22 +57,6 @@ void TraderServer::onErrRtnOrderInsert(int order_ref)
   XENA_TRACE <<"TraderServer::onErrRtnOrderInsert()";
 
   XENA_DEBUG <<"order_ref: " <<order_ref;
-
-  auto it = records_.find(order_ref);
-  if( it!=records_.end() )
-  {
-    it->second->updateT2();
-
-    timestamp_file_->putData( it->second );
-    
-    records_.erase( it );
-  }
-  else
-  {
-    XENA_ERROR <<"unexpected the error retn order, the order ref is " <<order_ref;
-  }
-
-
 }
 
 void TraderServer::onRtnOrder(int order_ref, const std::string& order_status, const std::string& status_msg)
@@ -67,32 +67,6 @@ void TraderServer::onRtnOrder(int order_ref, const std::string& order_status, co
              <<"; order_status = " <<order_status
              <<"; status_msg = " <<status_msg;
 
-  auto it = records_.find(order_ref);
-
-  if( it!=records_.end() )
-  {
-    if( order_status=="a" )
-    {
-      it->second->updateT1();
-    }
-    else if( order_status=="5" )
-    {
-      it->second->updateT2();
-
-      timestamp_file_->putData( it->second );
-
-      records_.erase( it );
-    }
-    else
-    {
-      XENA_ERROR <<"the order status is wrong, order_status " <<order_status;
-    }
-  }
-  else
-  {
-    XENA_ERROR <<"unexpected the rtn order, the order ref is " <<order_ref;
-  }
-    
 }
 
 void TraderServer::onRtnTrade(int order_ref, double price, int volume)
