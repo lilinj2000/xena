@@ -277,9 +277,6 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
-GTEST_CPPFLAGS = @GTEST_CPPFLAGS@
-GTEST_HOME = @GTEST_HOME@
-GTEST_LIBADD = @GTEST_LIBADD@
 HAVE_CXX11 = @HAVE_CXX11@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -394,9 +391,9 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 		$(AIR_CPPFLAGS)
 
 xena_LDADD = \
+	$(XTRA_LIBADD) \
 	$(BOOST_LIBADD) \
 	$(SOIL_LIBADD) \
-	$(XTRA_LIBADD) \
 	$(AIR_LIBADD)
 
 xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
@@ -406,7 +403,7 @@ noinst_HEADERS = XenaConfig.hh \
 		XenaLog.hh \
 		TraderServer.hh
 
-EXTRA_DIST = env.sh.example xena.cfg.example log.cfg.example
+EXTRA_DIST = env.sh xena.cfg log.cfg
 xenadir = $(bindir)
 xena_DATA = $(EXTRA_DIST)
 all: all-recursive

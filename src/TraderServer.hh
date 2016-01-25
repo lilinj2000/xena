@@ -19,7 +19,9 @@ class TraderServer : public xtra::TraderServiceCallback
 
   virtual void onRspError(int errord_id, const std::string& error_msg);
   
-  virtual void onRspOrderInsert(int order_ref);
+  virtual void onRspOrderInsert(int order_ref, bool is_success);
+
+  virtual void onErrRtnOrderInsert(int order_ref);
 
   virtual void onRtnOrder(int order_ref, const std::string& order_status, const std::string& status_msg);
 

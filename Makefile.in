@@ -227,9 +227,6 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 GREP = @GREP@
-GTEST_CPPFLAGS = @GTEST_CPPFLAGS@
-GTEST_HOME = @GTEST_HOME@
-GTEST_LIBADD = @GTEST_LIBADD@
 HAVE_CXX11 = @HAVE_CXX11@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
@@ -331,7 +328,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
-SUBDIRS = src utest
+SUBDIRS = src
 EXTRA_DIST = deploy.sh
 all: all-recursive
 

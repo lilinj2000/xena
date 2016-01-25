@@ -636,9 +636,6 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIB@&t@OBJS
-GTEST_LIBADD
-GTEST_CPPFLAGS
-GTEST_HOME
 AIR_LIBADD
 AIR_CPPFLAGS
 AIR_HOME
@@ -791,7 +788,6 @@ with_boost
 with_soil
 with_xtra
 with_air
-with_gtest
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1448,7 +1444,6 @@ Optional Packages:
   --with-soil             home path of the soil, defaults to @S|@home_libs/soil
   --with-xtra             home path of the xtra, defaults to @S|@XTRA_HOME
   --with-air              home path of the air, defaults to @S|@home_libs/air
-  --with-gtest            home path of the gtest, defaults to @S|@home_3rd/gtest
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -15382,22 +15377,7 @@ AIR_LIBADD="$AIR_HOME/lib/libair.la"
 
 
 
-
-@%:@ Check whether --with-gtest was given.
-if test "${with_gtest+set}" = set; then :
-  withval=$with_gtest; GTEST_HOME="$withval"
-else
-  GTEST_HOME="$home_3rd/gtest"
-fi
-
-
-
-GTEST_CPPFLAGS=-I$GTEST_HOME/include
-GTEST_LIBADD="$GTEST_HOME/lib/libgtest.a $GTEST_HOME/lib/libgtest_main.a"
-
-
-
-ac_config_files="$ac_config_files Makefile src/Makefile utest/Makefile"
+ac_config_files="$ac_config_files Makefile src/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -16523,7 +16503,6 @@ do
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
-    "utest/Makefile") CONFIG_FILES="$CONFIG_FILES utest/Makefile" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

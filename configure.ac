@@ -105,23 +105,9 @@ AIR_LIBADD="$AIR_HOME/lib/libair.la"
 AC_SUBST(AIR_CPPFLAGS)
 AC_SUBST(AIR_LIBADD)
 
-dnl gtest lib
-AC_ARG_WITH([gtest],
-    [AS_HELP_STRING([--with-gtest],
-        [home path of the gtest, defaults to $home_3rd/gtest])],
-    [GTEST_HOME="$withval"],
-    [GTEST_HOME="$home_3rd/gtest"])
-AC_SUBST([GTEST_HOME])
-
-GTEST_CPPFLAGS=-I$GTEST_HOME/include
-GTEST_LIBADD="$GTEST_HOME/lib/libgtest.a $GTEST_HOME/lib/libgtest_main.a"
-AC_SUBST(GTEST_CPPFLAGS)
-AC_SUBST(GTEST_LIBADD)
-
 AC_OUTPUT([
 	Makefile
-	src/Makefile
-	utest/Makefile])
+	src/Makefile])
 	
 
 

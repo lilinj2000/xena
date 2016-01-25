@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = foreign
 
-SUBDIRS = src utest
+SUBDIRS = src
 
 EXTRA_DIST = deploy.sh

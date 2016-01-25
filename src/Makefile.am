@@ -17,9 +17,9 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 
 
 xena_LDADD = \
+	$(XTRA_LIBADD) \
 	$(BOOST_LIBADD) \
 	$(SOIL_LIBADD) \
-	$(XTRA_LIBADD) \
 	$(AIR_LIBADD)
 
 
@@ -31,7 +31,7 @@ noinst_HEADERS = XenaConfig.hh \
 		TraderServer.hh
 
 
-EXTRA_DIST = env.sh.example xena.cfg.example log.cfg.example
+EXTRA_DIST = env.sh xena.cfg log.cfg
 
 xenadir = $(bindir)
 xena_DATA = $(EXTRA_DIST)
