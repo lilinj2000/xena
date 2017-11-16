@@ -1,19 +1,52 @@
+// Copyright (c) 2010
+// All rights reserved.
+
 #include <memory>
-#include "XenaConfig.hh"
-#include "TraderServer.hh"
+#include <iostream>
+#include "Server.hh"
+#include "soil/json.hh"
+#include "soil/Log.hh"
+#include "args.hxx"
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
+  args::ArgumentParser parser("The order test program.");
+  args::HelpFlag help(
+      parser,
+      "help",
+      "Display this help menu",
+      {'h', "help"});
+  args::ValueFlag<std::string> config(
+      parser,
+      "config",
+      "config file",
+      {'c', "config"});
 
-  std::unique_ptr<xena::XenaConfig> config;
-  config.reset(new xena::XenaConfig(argc, argv));
+  try {
+    parser.ParseCLI(argc, argv);
+  } catch (args::Help) {
+    std::cout << parser;
+    return 0;
+  } catch (args::ParseError e) {
+    std::cerr << e.what() << std::endl;
+    std::cerr << parser;
+    return 1;
+  }
 
-  xena::XenaOptions* xena_options = config->xenaOptions();
+  std::string config_file;
+  if (config) {
+    config_file = args::get(config);
+  } else {
+    std::cout << parser;
+    return 0;
+  }
 
-  std::unique_ptr<xena::TraderServer> server;
-  server.reset(new xena::TraderServer(xena_options, config->xtraTraderOptions()));
+  std::unique_ptr<xena::Server> server;
 
-  server->run();
-  
+  rapidjson::Document doc;
+  soil::json::load_from_file(&doc, config_file);
+  soil::log::init(doc);
+
+  server.reset(new xena::Server(doc));
+
   return 0;
 }

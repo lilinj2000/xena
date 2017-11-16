@@ -2,36 +2,54 @@ AUTOMAKE_OPTIONS = foreign
 
 SUBDIRS = 
 
-bin_PROGRAMS = xena
+bin_PROGRAMS = fema
+
 xena_SOURCES = \
-	XenaConfig.cc \
-	TraderServer.cc \
+	TimeStampDataFile.cc \
+	Options.cc \
+	Server.cc \
 	Main.cc 
 
+fema_SOURCES = \
+	FoalTService.cc \
+	$(xena_SOURCES)
 
 xena_CPPFLAGS = -I$(top_srcdir) \
 		$(BOOST_CPPFLAGS) \
-		$(SOIL_CPPFLAGS) \
-		$(XTRA_CPPFLAGS) \
-		$(AIR_CPPFLAGS)
+		$(RAPIDJSON_CPPFLAGS) \
+		$(FMT_CPPFLAGS) \
+		$(SPDLOG_CPPFLAGS) \
+		$(READERWRITERQUEUE_CPPFLAGS) \
+		$(ARGS_CPPFLAGS) \
+		$(SOIL_CPPFLAGS) 
 
+fema_CPPFLAGS = \
+	$(xena_CPPFLAGS) \
+	$(FOAL_CPPFLAGS)
 
 xena_LDADD = \
-	$(XTRA_LIBADD) \
 	$(BOOST_LIBADD) \
 	$(SOIL_LIBADD) \
-	$(AIR_LIBADD)
+	$(FMT_LIBADD)
+
+fema_LDADD = \
+	$(xena_LDADD) \
+	$(FOAL_LIBADD)
 
 
-xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
+xena_ldflags = $(LIBADD_DL) -Wl,--no-as-needed -pthread
+
+fema_LDFLAGS = $(xena_ldflags)
 
 # header files
-noinst_HEADERS = XenaConfig.hh \
-		XenaLog.hh \
-		TraderServer.hh
+noinst_HEADERS = \
+		TimeStampDataFile.hh \
+		Options.hh \
+		Server.hh \
+		TService.hh \
+		FoalTService.hh
 
+EXTRA_DIST = env.sh 
 
-EXTRA_DIST = env.sh xena.cfg log.cfg
-
-xenadir = $(bindir)
-xena_DATA = $(EXTRA_DIST)
+# xenadir = $(bindir)
+# xena_DATA = $(EXTRA_DIST)

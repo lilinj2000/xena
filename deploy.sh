@@ -1,10 +1,7 @@
 #! /bin/sh
 
-home_app=~/app
-
-if test -d /llj/app ; then
-   home_app=/llj/app
-fi
+node=`uname -n`
+home_app=~/app/${node}
 
 home_xena=${home_app}/xena
 
