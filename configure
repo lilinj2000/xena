@@ -664,6 +664,9 @@ LIBOBJS
 XTRA_LIBADD
 XTRA_CPPFLAGS
 XTRA_HOME
+SEA_LIBADD
+SEA_CPPFLAGS
+SEA_HOME
 FOAL_LIBADD
 FOAL_CPPFLAGS
 FOAL_HOME
@@ -821,6 +824,7 @@ with_readerwriterqueue
 with_args
 with_soil
 with_foal
+with_sea
 with_xtra
 '
       ac_precious_vars='build_alias
@@ -1493,6 +1497,7 @@ Optional Packages:
   --with-args             home path of the args, defaults to $ARGS_HOME
   --with-soil             home path of the soil, defaults to $home_libs/soil
   --with-foal             home path of the foal, defaults to $FOAL_HOME
+  --with-sea              home path of the sea, defaults to $SEA_HOME
   --with-xtra             home path of the xtra, defaults to $XTRA_HOME
 
 Some influential environment variables:
@@ -16380,6 +16385,22 @@ fi
 
 FOAL_CPPFLAGS="-I$FOAL_HOME/include"
 FOAL_LIBADD="$FOAL_HOME/lib/libfoal.la"
+
+
+
+SEA_HOME=$home_libs/sea
+
+# Check whether --with-sea was given.
+if test "${with_sea+set}" = set; then
+  withval=$with_sea; SEA_HOME="$withval"
+else
+  SEA_HOME="$SEA_HOME"
+fi
+
+
+
+SEA_CPPFLAGS="-I$SEA_HOME/include"
+SEA_LIBADD="$SEA_HOME/lib/libsea.la"
 
 
 

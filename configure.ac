@@ -142,6 +142,20 @@ FOAL_LIBADD="$FOAL_HOME/lib/libfoal.la"
 AC_SUBST(FOAL_CPPFLAGS)
 AC_SUBST(FOAL_LIBADD)
 
+dnl sea lib
+SEA_HOME=$home_libs/sea
+AC_ARG_WITH([sea], 
+    [AS_HELP_STRING([--with-sea],
+        [home path of the sea, defaults to $SEA_HOME])],
+    [SEA_HOME="$withval"],
+    [SEA_HOME="$SEA_HOME"])
+AC_SUBST([SEA_HOME])
+
+SEA_CPPFLAGS="-I$SEA_HOME/include"
+SEA_LIBADD="$SEA_HOME/lib/libsea.la"
+AC_SUBST(SEA_CPPFLAGS)
+AC_SUBST(SEA_LIBADD)
+
 dnl xtra lib
 XTRA_HOME=$home_libs/xtra
 AC_ARG_WITH([xtra], 
