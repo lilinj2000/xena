@@ -15,7 +15,7 @@ Options::Options(
   get_item_value(&interval, doc, "/xena/interval");
   get_item_value(&count, doc, "/xena/count");
 
-  get_item_value(&only_t1, doc, "/xena/only_t1");
+  get_item_value(&ts_flag, doc, "/xena/ts_flag");
 
   get_item_value(&data_file, doc, "/xena/data_file");
 }

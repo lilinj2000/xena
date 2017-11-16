@@ -1,12 +1,4 @@
 {
-    "foal_trader": {
-        "broker_id": "0158", 
-        "flow_path": "./", 
-        "front_address": "tcp://180.169.101.189:7001", 
-        "investor_id": "04452", 
-        "password": "111111", 
-        "user_id": "04452"
-    }, 
     "log": {
         "level": "trace", 
         "sinks": [
@@ -35,5 +27,14 @@
         "price": 3790, 
         "ts_flag": 1, 
         "volume": 1
+    }, 
+    "xtra": {
+        "account_id": "88991042", 
+        "client_id": "88991042d", 
+        "exchange_id": 1, 
+        "front_address": "tcp://127.0.0.1:122", 
+        "participant_id": "0148", 
+        "password": "1", 
+        "user_id": "88991042d"
     }
 }

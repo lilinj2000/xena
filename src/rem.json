@@ -10,7 +10,8 @@
             }, 
             {
                 "sink": {
-                    "file_name": "stab.log", 
+                    "file_name": "xena.log", 
+                    "level": "info", 
                     "max_file_size": 5000000, 
                     "max_files": 10, 
                     "type": "rotating_file_sink_mt"
@@ -31,12 +32,12 @@
         "user_id": "88991042d"
     }, 
     "xena": {
-        "instru": "cu1712", 
-        "only_t1": true, 
-        "order_counter": 1, 
-        "order_interval": 2000, 
-        "price": 34540, 
-        "timestamp_file": "stab_timestamp.data", 
-        "volume": 10
+        "count": 1, 
+        "data_file": "xena_data.txt", 
+        "instru": "IF1712", 
+        "interval": 2000, 
+        "price": 3790, 
+        "ts_flag": 1, 
+        "volume": 1
     }
 }

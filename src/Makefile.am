@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = foreign
 
 SUBDIRS = 
 
-bin_PROGRAMS = fema rem
+bin_PROGRAMS = fema rem xele
 
 xena_SOURCES = \
 	TimeStampDataFile.cc \
@@ -16,6 +16,10 @@ fema_SOURCES = \
 
 rem_SOURCES = \
 	SeaTService.cc \
+	$(xena_SOURCES)
+
+xele_SOURCES = \
+	XtraTService.cc \
 	$(xena_SOURCES)
 
 xena_CPPFLAGS = -I$(top_srcdir) \
@@ -35,6 +39,10 @@ rem_CPPFLAGS = \
 	$(xena_CPPFLAGS) \
 	$(SEA_CPPFLAGS)
 
+xele_CPPFLAGS = \
+	$(xena_CPPFLAGS) \
+	$(XTRA_CPPFLAGS)
+
 xena_LDADD = \
 	$(BOOST_LIBADD) \
 	$(SOIL_LIBADD) \
@@ -48,11 +56,15 @@ rem_LDADD = \
 	$(xena_LDADD) \
 	$(SEA_LIBADD)
 
+xele_LDADD = \
+	$(xena_LDADD) \
+	$(XTRA_LIBADD)
 
 xena_ldflags = $(LIBADD_DL) -Wl,--no-as-needed -pthread
 
 fema_LDFLAGS = $(xena_ldflags)
 rem_LDFLAGS = $(xena_ldflags)
+xele_LDFLAGS = $(xena_ldflags)
 
 # header files
 noinst_HEADERS = \
@@ -61,7 +73,8 @@ noinst_HEADERS = \
 		Server.hh \
 		TService.hh \
 		FoalTService.hh \
-		SeaTService.hh
+		SeaTService.hh \
+		XtraTService.hh
 
 EXTRA_DIST = env.sh 
 

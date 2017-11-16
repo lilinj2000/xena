@@ -82,7 +82,8 @@ void Server::updateT(
       it->second->updateT2();
     }
 
-    if (options_->only_t1
+    if ((is_t1 && options_->ts_flag == Options::ONLY_T1)
+        || (!is_t1 && options_->ts_flag == Options::ONLY_T2)
         || it->second->allUpdated()) {
       data_file_->putData(it->second);
       records_.erase(it);
