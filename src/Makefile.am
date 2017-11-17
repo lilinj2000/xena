@@ -46,7 +46,7 @@ noinst_HEADERS = \
 		SeaTService.hh \
 		XtraTService.hh
 
-EXTRA_DIST = env.sh 
+EXTRA_DIST = fema.json rem.json xele.json
 
 xenadir = $(bindir)
 xena_DATA = $(EXTRA_DIST)

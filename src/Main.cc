@@ -32,12 +32,9 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  std::string config_file;
+  std::string config_file = "xena.json";
   if (config) {
     config_file = args::get(config);
-  } else {
-    std::cout << parser;
-    return 0;
   }
 
   std::unique_ptr<xena::Server> server;
