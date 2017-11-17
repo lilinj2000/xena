@@ -49,6 +49,8 @@ void Server::run() {
   int count = 0;
 
   do {
+    wait(options_->interval);
+
     int32_t local_id = tservice_->orderInsert(
         options_->instru,
         options_->price,
@@ -64,8 +66,6 @@ void Server::run() {
         && count >= options_->count) {
       break;
     }
-
-    wait(options_->interval);
   }while(true);
 
   wait(options_->interval);

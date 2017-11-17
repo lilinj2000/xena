@@ -26,6 +26,9 @@ class TService {
       double price,
       int volume) = 0;
 
+  virtual ~TService() {
+  }
+
   static TService* create(
       const rapidjson::Document& doc,
       TServiceCallback* callback);

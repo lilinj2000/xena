@@ -44,7 +44,7 @@ void XtraTService::onRspOrderInsert(
   int32_t local_id = std::stoi(order_local_id);
 
   if (callback_) {
-    callback_->t2Update(local_id);
+    callback_->t1Update(local_id);
   }
 }
 
@@ -68,7 +68,7 @@ void XtraTService::onErrRtnOrderInsert(
   int32_t local_id = std::stoi(order_local_id);
 
   if (callback_) {
-    callback_->t2Update(local_id);
+    callback_->t1Update(local_id);
   }
 }
 
