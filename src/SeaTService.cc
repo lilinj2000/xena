@@ -121,12 +121,4 @@ int32_t SeaTService::orderInsert(
   return local_id;
 }
 
-TService* TService::create(
-          const rapidjson::Document& doc,
-          TServiceCallback* callback) {
-  return new SeaTService(doc, callback);
-}
-
-
-
 };  // namespace xena

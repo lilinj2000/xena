@@ -86,12 +86,4 @@ int32_t FoalTService::orderInsert(
   return order_ref;
 }
 
-TService* TService::create(
-          const rapidjson::Document& doc,
-          TServiceCallback* callback) {
-  return new FoalTService(doc, callback);
-}
-
-
-
 };  // namespace xena

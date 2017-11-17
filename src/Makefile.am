@@ -2,25 +2,17 @@ AUTOMAKE_OPTIONS = foreign
 
 SUBDIRS = 
 
-bin_PROGRAMS = fema rem xele
+bin_PROGRAMS = xena
 
 xena_SOURCES = \
 	TimeStampDataFile.cc \
 	Options.cc \
 	Server.cc \
-	Main.cc 
-
-fema_SOURCES = \
+	Main.cc \
 	FoalTService.cc \
-	$(xena_SOURCES)
-
-rem_SOURCES = \
 	SeaTService.cc \
-	$(xena_SOURCES)
-
-xele_SOURCES = \
 	XtraTService.cc \
-	$(xena_SOURCES)
+	TService.cc
 
 xena_CPPFLAGS = -I$(top_srcdir) \
 		$(BOOST_CPPFLAGS) \
@@ -29,42 +21,20 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 		$(SPDLOG_CPPFLAGS) \
 		$(READERWRITERQUEUE_CPPFLAGS) \
 		$(ARGS_CPPFLAGS) \
-		$(SOIL_CPPFLAGS) 
-
-fema_CPPFLAGS = \
-	$(xena_CPPFLAGS) \
-	$(FOAL_CPPFLAGS)
-
-rem_CPPFLAGS = \
-	$(xena_CPPFLAGS) \
-	$(SEA_CPPFLAGS)
-
-xele_CPPFLAGS = \
-	$(xena_CPPFLAGS) \
-	$(XTRA_CPPFLAGS)
+		$(SOIL_CPPFLAGS) \
+		$(FOAL_CPPFLAGS) \
+		$(SEA_CPPFLAGS) \
+		$(XTRA_CPPFLAGS)
 
 xena_LDADD = \
 	$(BOOST_LIBADD) \
 	$(SOIL_LIBADD) \
-	$(FMT_LIBADD)
-
-fema_LDADD = \
-	$(xena_LDADD) \
-	$(FOAL_LIBADD)
-
-rem_LDADD = \
-	$(xena_LDADD) \
-	$(SEA_LIBADD)
-
-xele_LDADD = \
-	$(xena_LDADD) \
+	$(FMT_LIBADD) \
+	$(FOAL_LIBADD) \
+	$(SEA_LIBADD) \
 	$(XTRA_LIBADD)
 
-xena_ldflags = $(LIBADD_DL) -Wl,--no-as-needed -pthread
-
-fema_LDFLAGS = $(xena_ldflags)
-rem_LDFLAGS = $(xena_ldflags)
-xele_LDFLAGS = $(xena_ldflags)
+xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
 
 # header files
 noinst_HEADERS = \
@@ -78,5 +48,5 @@ noinst_HEADERS = \
 
 EXTRA_DIST = env.sh 
 
-# xenadir = $(bindir)
-# xena_DATA = $(EXTRA_DIST)
+xenadir = $(bindir)
+xena_DATA = $(EXTRA_DIST)

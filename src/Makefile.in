@@ -16,6 +16,7 @@
 @SET_MAKE@
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -35,7 +36,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = fema$(EXEEXT) rem$(EXEEXT) xele$(EXEEXT)
+bin_PROGRAMS = xena$(EXEEXT)
 subdir = src
 DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
@@ -49,37 +50,21 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)"
+am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(xenadir)"
 PROGRAMS = $(bin_PROGRAMS)
-am__objects_1 = fema-TimeStampDataFile.$(OBJEXT) \
-	fema-Options.$(OBJEXT) fema-Server.$(OBJEXT) \
-	fema-Main.$(OBJEXT)
-am_fema_OBJECTS = fema-FoalTService.$(OBJEXT) $(am__objects_1)
-fema_OBJECTS = $(am_fema_OBJECTS)
+am_xena_OBJECTS = xena-TimeStampDataFile.$(OBJEXT) \
+	xena-Options.$(OBJEXT) xena-Server.$(OBJEXT) \
+	xena-Main.$(OBJEXT) xena-FoalTService.$(OBJEXT) \
+	xena-SeaTService.$(OBJEXT) xena-XtraTService.$(OBJEXT) \
+	xena-TService.$(OBJEXT)
+xena_OBJECTS = $(am_xena_OBJECTS)
 am__DEPENDENCIES_1 =
-am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
-fema_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
-fema_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+xena_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+xena_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(fema_LDFLAGS) $(LDFLAGS) -o $@
-am__objects_2 = rem-TimeStampDataFile.$(OBJEXT) rem-Options.$(OBJEXT) \
-	rem-Server.$(OBJEXT) rem-Main.$(OBJEXT)
-am_rem_OBJECTS = rem-SeaTService.$(OBJEXT) $(am__objects_2)
-rem_OBJECTS = $(am_rem_OBJECTS)
-rem_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
-rem_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(rem_LDFLAGS) \
-	$(LDFLAGS) -o $@
-am__objects_3 = xele-TimeStampDataFile.$(OBJEXT) \
-	xele-Options.$(OBJEXT) xele-Server.$(OBJEXT) \
-	xele-Main.$(OBJEXT)
-am_xele_OBJECTS = xele-XtraTService.$(OBJEXT) $(am__objects_3)
-xele_OBJECTS = $(am_xele_OBJECTS)
-xele_DEPENDENCIES = $(am__DEPENDENCIES_2) $(am__DEPENDENCIES_1)
-xele_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
-	$(xele_LDFLAGS) $(LDFLAGS) -o $@
+	$(xena_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -93,8 +78,8 @@ CXXLD = $(CXX)
 CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(fema_SOURCES) $(rem_SOURCES) $(xele_SOURCES)
-DIST_SOURCES = $(fema_SOURCES) $(rem_SOURCES) $(xele_SOURCES)
+SOURCES = $(xena_SOURCES)
+DIST_SOURCES = $(xena_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -102,6 +87,28 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	install-pdf-recursive install-ps-recursive install-recursive \
 	installcheck-recursive installdirs-recursive pdf-recursive \
 	ps-recursive uninstall-recursive
+am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
+am__vpath_adj = case $$p in \
+    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
+    *) f=$$p;; \
+  esac;
+am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
+am__install_max = 40
+am__nobase_strip_setup = \
+  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
+am__nobase_strip = \
+  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
+am__nobase_list = $(am__nobase_strip_setup); \
+  for p in $$list; do echo "$$p $$p"; done | \
+  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
+  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
+    if (++n[$$2] == $(am__install_max)) \
+      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
+    END { for (dir in files) print dir, files[dir] }'
+am__base_list = \
+  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
+  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
+DATA = $(xena_DATA)
 HEADERS = $(noinst_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
@@ -291,19 +298,11 @@ xena_SOURCES = \
 	TimeStampDataFile.cc \
 	Options.cc \
 	Server.cc \
-	Main.cc 
-
-fema_SOURCES = \
+	Main.cc \
 	FoalTService.cc \
-	$(xena_SOURCES)
-
-rem_SOURCES = \
 	SeaTService.cc \
-	$(xena_SOURCES)
-
-xele_SOURCES = \
 	XtraTService.cc \
-	$(xena_SOURCES)
+	TService.cc
 
 xena_CPPFLAGS = -I$(top_srcdir) \
 		$(BOOST_CPPFLAGS) \
@@ -312,41 +311,20 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 		$(SPDLOG_CPPFLAGS) \
 		$(READERWRITERQUEUE_CPPFLAGS) \
 		$(ARGS_CPPFLAGS) \
-		$(SOIL_CPPFLAGS) 
-
-fema_CPPFLAGS = \
-	$(xena_CPPFLAGS) \
-	$(FOAL_CPPFLAGS)
-
-rem_CPPFLAGS = \
-	$(xena_CPPFLAGS) \
-	$(SEA_CPPFLAGS)
-
-xele_CPPFLAGS = \
-	$(xena_CPPFLAGS) \
-	$(XTRA_CPPFLAGS)
+		$(SOIL_CPPFLAGS) \
+		$(FOAL_CPPFLAGS) \
+		$(SEA_CPPFLAGS) \
+		$(XTRA_CPPFLAGS)
 
 xena_LDADD = \
 	$(BOOST_LIBADD) \
 	$(SOIL_LIBADD) \
-	$(FMT_LIBADD)
-
-fema_LDADD = \
-	$(xena_LDADD) \
-	$(FOAL_LIBADD)
-
-rem_LDADD = \
-	$(xena_LDADD) \
-	$(SEA_LIBADD)
-
-xele_LDADD = \
-	$(xena_LDADD) \
+	$(FMT_LIBADD) \
+	$(FOAL_LIBADD) \
+	$(SEA_LIBADD) \
 	$(XTRA_LIBADD)
 
-xena_ldflags = $(LIBADD_DL) -Wl,--no-as-needed -pthread
-fema_LDFLAGS = $(xena_ldflags)
-rem_LDFLAGS = $(xena_ldflags)
-xele_LDFLAGS = $(xena_ldflags)
+xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
 
 # header files
 noinst_HEADERS = \
@@ -359,6 +337,8 @@ noinst_HEADERS = \
 		XtraTService.hh
 
 EXTRA_DIST = env.sh 
+xenadir = $(bindir)
+xena_DATA = $(EXTRA_DIST)
 all: all-recursive
 
 .SUFFIXES:
@@ -436,15 +416,9 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-fema$(EXEEXT): $(fema_OBJECTS) $(fema_DEPENDENCIES) 
-	@rm -f fema$(EXEEXT)
-	$(fema_LINK) $(fema_OBJECTS) $(fema_LDADD) $(LIBS)
-rem$(EXEEXT): $(rem_OBJECTS) $(rem_DEPENDENCIES) 
-	@rm -f rem$(EXEEXT)
-	$(rem_LINK) $(rem_OBJECTS) $(rem_LDADD) $(LIBS)
-xele$(EXEEXT): $(xele_OBJECTS) $(xele_DEPENDENCIES) 
-	@rm -f xele$(EXEEXT)
-	$(xele_LINK) $(xele_OBJECTS) $(xele_LDADD) $(LIBS)
+xena$(EXEEXT): $(xena_OBJECTS) $(xena_DEPENDENCIES) 
+	@rm -f xena$(EXEEXT)
+	$(xena_LINK) $(xena_OBJECTS) $(xena_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -452,21 +426,14 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fema-FoalTService.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fema-Main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fema-Options.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fema-Server.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fema-TimeStampDataFile.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rem-Main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rem-Options.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rem-SeaTService.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rem-Server.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rem-TimeStampDataFile.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xele-Main.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xele-Options.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xele-Server.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xele-TimeStampDataFile.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xele-XtraTService.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-FoalTService.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-Main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-Options.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-SeaTService.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-Server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-TService.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-TimeStampDataFile.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-XtraTService.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -489,221 +456,143 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
 
-fema-FoalTService.o: FoalTService.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-FoalTService.o -MD -MP -MF $(DEPDIR)/fema-FoalTService.Tpo -c -o fema-FoalTService.o `test -f 'FoalTService.cc' || echo '$(srcdir)/'`FoalTService.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-FoalTService.Tpo $(DEPDIR)/fema-FoalTService.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FoalTService.cc' object='fema-FoalTService.o' libtool=no @AMDEPBACKSLASH@
+xena-TimeStampDataFile.o: TimeStampDataFile.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-TimeStampDataFile.o -MD -MP -MF $(DEPDIR)/xena-TimeStampDataFile.Tpo -c -o xena-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-TimeStampDataFile.Tpo $(DEPDIR)/xena-TimeStampDataFile.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='xena-TimeStampDataFile.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-FoalTService.o `test -f 'FoalTService.cc' || echo '$(srcdir)/'`FoalTService.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
 
-fema-FoalTService.obj: FoalTService.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-FoalTService.obj -MD -MP -MF $(DEPDIR)/fema-FoalTService.Tpo -c -o fema-FoalTService.obj `if test -f 'FoalTService.cc'; then $(CYGPATH_W) 'FoalTService.cc'; else $(CYGPATH_W) '$(srcdir)/FoalTService.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-FoalTService.Tpo $(DEPDIR)/fema-FoalTService.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FoalTService.cc' object='fema-FoalTService.obj' libtool=no @AMDEPBACKSLASH@
+xena-TimeStampDataFile.obj: TimeStampDataFile.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-TimeStampDataFile.obj -MD -MP -MF $(DEPDIR)/xena-TimeStampDataFile.Tpo -c -o xena-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-TimeStampDataFile.Tpo $(DEPDIR)/xena-TimeStampDataFile.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='xena-TimeStampDataFile.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-FoalTService.obj `if test -f 'FoalTService.cc'; then $(CYGPATH_W) 'FoalTService.cc'; else $(CYGPATH_W) '$(srcdir)/FoalTService.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
 
-fema-TimeStampDataFile.o: TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-TimeStampDataFile.o -MD -MP -MF $(DEPDIR)/fema-TimeStampDataFile.Tpo -c -o fema-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-TimeStampDataFile.Tpo $(DEPDIR)/fema-TimeStampDataFile.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='fema-TimeStampDataFile.o' libtool=no @AMDEPBACKSLASH@
+xena-Options.o: Options.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-Options.o -MD -MP -MF $(DEPDIR)/xena-Options.Tpo -c -o xena-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-Options.Tpo $(DEPDIR)/xena-Options.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='xena-Options.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
 
-fema-TimeStampDataFile.obj: TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-TimeStampDataFile.obj -MD -MP -MF $(DEPDIR)/fema-TimeStampDataFile.Tpo -c -o fema-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-TimeStampDataFile.Tpo $(DEPDIR)/fema-TimeStampDataFile.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='fema-TimeStampDataFile.obj' libtool=no @AMDEPBACKSLASH@
+xena-Options.obj: Options.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-Options.obj -MD -MP -MF $(DEPDIR)/xena-Options.Tpo -c -o xena-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-Options.Tpo $(DEPDIR)/xena-Options.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='xena-Options.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
 
-fema-Options.o: Options.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-Options.o -MD -MP -MF $(DEPDIR)/fema-Options.Tpo -c -o fema-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-Options.Tpo $(DEPDIR)/fema-Options.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='fema-Options.o' libtool=no @AMDEPBACKSLASH@
+xena-Server.o: Server.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-Server.o -MD -MP -MF $(DEPDIR)/xena-Server.Tpo -c -o xena-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-Server.Tpo $(DEPDIR)/xena-Server.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='xena-Server.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
 
-fema-Options.obj: Options.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-Options.obj -MD -MP -MF $(DEPDIR)/fema-Options.Tpo -c -o fema-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-Options.Tpo $(DEPDIR)/fema-Options.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='fema-Options.obj' libtool=no @AMDEPBACKSLASH@
+xena-Server.obj: Server.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-Server.obj -MD -MP -MF $(DEPDIR)/xena-Server.Tpo -c -o xena-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-Server.Tpo $(DEPDIR)/xena-Server.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='xena-Server.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
 
-fema-Server.o: Server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-Server.o -MD -MP -MF $(DEPDIR)/fema-Server.Tpo -c -o fema-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-Server.Tpo $(DEPDIR)/fema-Server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='fema-Server.o' libtool=no @AMDEPBACKSLASH@
+xena-Main.o: Main.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-Main.o -MD -MP -MF $(DEPDIR)/xena-Main.Tpo -c -o xena-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-Main.Tpo $(DEPDIR)/xena-Main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='xena-Main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
 
-fema-Server.obj: Server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-Server.obj -MD -MP -MF $(DEPDIR)/fema-Server.Tpo -c -o fema-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-Server.Tpo $(DEPDIR)/fema-Server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='fema-Server.obj' libtool=no @AMDEPBACKSLASH@
+xena-Main.obj: Main.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-Main.obj -MD -MP -MF $(DEPDIR)/xena-Main.Tpo -c -o xena-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-Main.Tpo $(DEPDIR)/xena-Main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='xena-Main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
 
-fema-Main.o: Main.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-Main.o -MD -MP -MF $(DEPDIR)/fema-Main.Tpo -c -o fema-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-Main.Tpo $(DEPDIR)/fema-Main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='fema-Main.o' libtool=no @AMDEPBACKSLASH@
+xena-FoalTService.o: FoalTService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-FoalTService.o -MD -MP -MF $(DEPDIR)/xena-FoalTService.Tpo -c -o xena-FoalTService.o `test -f 'FoalTService.cc' || echo '$(srcdir)/'`FoalTService.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-FoalTService.Tpo $(DEPDIR)/xena-FoalTService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FoalTService.cc' object='xena-FoalTService.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-FoalTService.o `test -f 'FoalTService.cc' || echo '$(srcdir)/'`FoalTService.cc
 
-fema-Main.obj: Main.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT fema-Main.obj -MD -MP -MF $(DEPDIR)/fema-Main.Tpo -c -o fema-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/fema-Main.Tpo $(DEPDIR)/fema-Main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='fema-Main.obj' libtool=no @AMDEPBACKSLASH@
+xena-FoalTService.obj: FoalTService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-FoalTService.obj -MD -MP -MF $(DEPDIR)/xena-FoalTService.Tpo -c -o xena-FoalTService.obj `if test -f 'FoalTService.cc'; then $(CYGPATH_W) 'FoalTService.cc'; else $(CYGPATH_W) '$(srcdir)/FoalTService.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-FoalTService.Tpo $(DEPDIR)/xena-FoalTService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='FoalTService.cc' object='xena-FoalTService.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(fema_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o fema-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-FoalTService.obj `if test -f 'FoalTService.cc'; then $(CYGPATH_W) 'FoalTService.cc'; else $(CYGPATH_W) '$(srcdir)/FoalTService.cc'; fi`
 
-rem-SeaTService.o: SeaTService.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-SeaTService.o -MD -MP -MF $(DEPDIR)/rem-SeaTService.Tpo -c -o rem-SeaTService.o `test -f 'SeaTService.cc' || echo '$(srcdir)/'`SeaTService.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-SeaTService.Tpo $(DEPDIR)/rem-SeaTService.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SeaTService.cc' object='rem-SeaTService.o' libtool=no @AMDEPBACKSLASH@
+xena-SeaTService.o: SeaTService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-SeaTService.o -MD -MP -MF $(DEPDIR)/xena-SeaTService.Tpo -c -o xena-SeaTService.o `test -f 'SeaTService.cc' || echo '$(srcdir)/'`SeaTService.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-SeaTService.Tpo $(DEPDIR)/xena-SeaTService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SeaTService.cc' object='xena-SeaTService.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-SeaTService.o `test -f 'SeaTService.cc' || echo '$(srcdir)/'`SeaTService.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-SeaTService.o `test -f 'SeaTService.cc' || echo '$(srcdir)/'`SeaTService.cc
 
-rem-SeaTService.obj: SeaTService.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-SeaTService.obj -MD -MP -MF $(DEPDIR)/rem-SeaTService.Tpo -c -o rem-SeaTService.obj `if test -f 'SeaTService.cc'; then $(CYGPATH_W) 'SeaTService.cc'; else $(CYGPATH_W) '$(srcdir)/SeaTService.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-SeaTService.Tpo $(DEPDIR)/rem-SeaTService.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SeaTService.cc' object='rem-SeaTService.obj' libtool=no @AMDEPBACKSLASH@
+xena-SeaTService.obj: SeaTService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-SeaTService.obj -MD -MP -MF $(DEPDIR)/xena-SeaTService.Tpo -c -o xena-SeaTService.obj `if test -f 'SeaTService.cc'; then $(CYGPATH_W) 'SeaTService.cc'; else $(CYGPATH_W) '$(srcdir)/SeaTService.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-SeaTService.Tpo $(DEPDIR)/xena-SeaTService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='SeaTService.cc' object='xena-SeaTService.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-SeaTService.obj `if test -f 'SeaTService.cc'; then $(CYGPATH_W) 'SeaTService.cc'; else $(CYGPATH_W) '$(srcdir)/SeaTService.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-SeaTService.obj `if test -f 'SeaTService.cc'; then $(CYGPATH_W) 'SeaTService.cc'; else $(CYGPATH_W) '$(srcdir)/SeaTService.cc'; fi`
 
-rem-TimeStampDataFile.o: TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-TimeStampDataFile.o -MD -MP -MF $(DEPDIR)/rem-TimeStampDataFile.Tpo -c -o rem-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-TimeStampDataFile.Tpo $(DEPDIR)/rem-TimeStampDataFile.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='rem-TimeStampDataFile.o' libtool=no @AMDEPBACKSLASH@
+xena-XtraTService.o: XtraTService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-XtraTService.o -MD -MP -MF $(DEPDIR)/xena-XtraTService.Tpo -c -o xena-XtraTService.o `test -f 'XtraTService.cc' || echo '$(srcdir)/'`XtraTService.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-XtraTService.Tpo $(DEPDIR)/xena-XtraTService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='XtraTService.cc' object='xena-XtraTService.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-XtraTService.o `test -f 'XtraTService.cc' || echo '$(srcdir)/'`XtraTService.cc
 
-rem-TimeStampDataFile.obj: TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-TimeStampDataFile.obj -MD -MP -MF $(DEPDIR)/rem-TimeStampDataFile.Tpo -c -o rem-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-TimeStampDataFile.Tpo $(DEPDIR)/rem-TimeStampDataFile.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='rem-TimeStampDataFile.obj' libtool=no @AMDEPBACKSLASH@
+xena-XtraTService.obj: XtraTService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-XtraTService.obj -MD -MP -MF $(DEPDIR)/xena-XtraTService.Tpo -c -o xena-XtraTService.obj `if test -f 'XtraTService.cc'; then $(CYGPATH_W) 'XtraTService.cc'; else $(CYGPATH_W) '$(srcdir)/XtraTService.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-XtraTService.Tpo $(DEPDIR)/xena-XtraTService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='XtraTService.cc' object='xena-XtraTService.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-XtraTService.obj `if test -f 'XtraTService.cc'; then $(CYGPATH_W) 'XtraTService.cc'; else $(CYGPATH_W) '$(srcdir)/XtraTService.cc'; fi`
 
-rem-Options.o: Options.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-Options.o -MD -MP -MF $(DEPDIR)/rem-Options.Tpo -c -o rem-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-Options.Tpo $(DEPDIR)/rem-Options.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='rem-Options.o' libtool=no @AMDEPBACKSLASH@
+xena-TService.o: TService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-TService.o -MD -MP -MF $(DEPDIR)/xena-TService.Tpo -c -o xena-TService.o `test -f 'TService.cc' || echo '$(srcdir)/'`TService.cc
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-TService.Tpo $(DEPDIR)/xena-TService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TService.cc' object='xena-TService.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-TService.o `test -f 'TService.cc' || echo '$(srcdir)/'`TService.cc
 
-rem-Options.obj: Options.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-Options.obj -MD -MP -MF $(DEPDIR)/rem-Options.Tpo -c -o rem-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-Options.Tpo $(DEPDIR)/rem-Options.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='rem-Options.obj' libtool=no @AMDEPBACKSLASH@
+xena-TService.obj: TService.cc
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-TService.obj -MD -MP -MF $(DEPDIR)/xena-TService.Tpo -c -o xena-TService.obj `if test -f 'TService.cc'; then $(CYGPATH_W) 'TService.cc'; else $(CYGPATH_W) '$(srcdir)/TService.cc'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xena-TService.Tpo $(DEPDIR)/xena-TService.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TService.cc' object='xena-TService.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
-
-rem-Server.o: Server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-Server.o -MD -MP -MF $(DEPDIR)/rem-Server.Tpo -c -o rem-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-Server.Tpo $(DEPDIR)/rem-Server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='rem-Server.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
-
-rem-Server.obj: Server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-Server.obj -MD -MP -MF $(DEPDIR)/rem-Server.Tpo -c -o rem-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-Server.Tpo $(DEPDIR)/rem-Server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='rem-Server.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
-
-rem-Main.o: Main.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-Main.o -MD -MP -MF $(DEPDIR)/rem-Main.Tpo -c -o rem-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-Main.Tpo $(DEPDIR)/rem-Main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='rem-Main.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
-
-rem-Main.obj: Main.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT rem-Main.obj -MD -MP -MF $(DEPDIR)/rem-Main.Tpo -c -o rem-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/rem-Main.Tpo $(DEPDIR)/rem-Main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='rem-Main.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(rem_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o rem-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
-
-xele-XtraTService.o: XtraTService.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-XtraTService.o -MD -MP -MF $(DEPDIR)/xele-XtraTService.Tpo -c -o xele-XtraTService.o `test -f 'XtraTService.cc' || echo '$(srcdir)/'`XtraTService.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-XtraTService.Tpo $(DEPDIR)/xele-XtraTService.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='XtraTService.cc' object='xele-XtraTService.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-XtraTService.o `test -f 'XtraTService.cc' || echo '$(srcdir)/'`XtraTService.cc
-
-xele-XtraTService.obj: XtraTService.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-XtraTService.obj -MD -MP -MF $(DEPDIR)/xele-XtraTService.Tpo -c -o xele-XtraTService.obj `if test -f 'XtraTService.cc'; then $(CYGPATH_W) 'XtraTService.cc'; else $(CYGPATH_W) '$(srcdir)/XtraTService.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-XtraTService.Tpo $(DEPDIR)/xele-XtraTService.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='XtraTService.cc' object='xele-XtraTService.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-XtraTService.obj `if test -f 'XtraTService.cc'; then $(CYGPATH_W) 'XtraTService.cc'; else $(CYGPATH_W) '$(srcdir)/XtraTService.cc'; fi`
-
-xele-TimeStampDataFile.o: TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-TimeStampDataFile.o -MD -MP -MF $(DEPDIR)/xele-TimeStampDataFile.Tpo -c -o xele-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-TimeStampDataFile.Tpo $(DEPDIR)/xele-TimeStampDataFile.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='xele-TimeStampDataFile.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-TimeStampDataFile.o `test -f 'TimeStampDataFile.cc' || echo '$(srcdir)/'`TimeStampDataFile.cc
-
-xele-TimeStampDataFile.obj: TimeStampDataFile.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-TimeStampDataFile.obj -MD -MP -MF $(DEPDIR)/xele-TimeStampDataFile.Tpo -c -o xele-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-TimeStampDataFile.Tpo $(DEPDIR)/xele-TimeStampDataFile.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='TimeStampDataFile.cc' object='xele-TimeStampDataFile.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-TimeStampDataFile.obj `if test -f 'TimeStampDataFile.cc'; then $(CYGPATH_W) 'TimeStampDataFile.cc'; else $(CYGPATH_W) '$(srcdir)/TimeStampDataFile.cc'; fi`
-
-xele-Options.o: Options.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-Options.o -MD -MP -MF $(DEPDIR)/xele-Options.Tpo -c -o xele-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-Options.Tpo $(DEPDIR)/xele-Options.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='xele-Options.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-Options.o `test -f 'Options.cc' || echo '$(srcdir)/'`Options.cc
-
-xele-Options.obj: Options.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-Options.obj -MD -MP -MF $(DEPDIR)/xele-Options.Tpo -c -o xele-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-Options.Tpo $(DEPDIR)/xele-Options.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Options.cc' object='xele-Options.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-Options.obj `if test -f 'Options.cc'; then $(CYGPATH_W) 'Options.cc'; else $(CYGPATH_W) '$(srcdir)/Options.cc'; fi`
-
-xele-Server.o: Server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-Server.o -MD -MP -MF $(DEPDIR)/xele-Server.Tpo -c -o xele-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-Server.Tpo $(DEPDIR)/xele-Server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='xele-Server.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-Server.o `test -f 'Server.cc' || echo '$(srcdir)/'`Server.cc
-
-xele-Server.obj: Server.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-Server.obj -MD -MP -MF $(DEPDIR)/xele-Server.Tpo -c -o xele-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-Server.Tpo $(DEPDIR)/xele-Server.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Server.cc' object='xele-Server.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-Server.obj `if test -f 'Server.cc'; then $(CYGPATH_W) 'Server.cc'; else $(CYGPATH_W) '$(srcdir)/Server.cc'; fi`
-
-xele-Main.o: Main.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-Main.o -MD -MP -MF $(DEPDIR)/xele-Main.Tpo -c -o xele-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-Main.Tpo $(DEPDIR)/xele-Main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='xele-Main.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-Main.o `test -f 'Main.cc' || echo '$(srcdir)/'`Main.cc
-
-xele-Main.obj: Main.cc
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xele-Main.obj -MD -MP -MF $(DEPDIR)/xele-Main.Tpo -c -o xele-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/xele-Main.Tpo $(DEPDIR)/xele-Main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='Main.cc' object='xele-Main.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xele_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xele-Main.obj `if test -f 'Main.cc'; then $(CYGPATH_W) 'Main.cc'; else $(CYGPATH_W) '$(srcdir)/Main.cc'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-TService.obj `if test -f 'TService.cc'; then $(CYGPATH_W) 'TService.cc'; else $(CYGPATH_W) '$(srcdir)/TService.cc'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-xenaDATA: $(xena_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(xenadir)" || $(MKDIR_P) "$(DESTDIR)$(xenadir)"
+	@list='$(xena_DATA)'; test -n "$(xenadir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(xenadir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(xenadir)" || exit $$?; \
+	done
+
+uninstall-xenaDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(xena_DATA)'; test -n "$(xenadir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(xenadir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(xenadir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -900,10 +789,10 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-recursive
-all-am: Makefile $(PROGRAMS) $(HEADERS)
+all-am: Makefile $(PROGRAMS) $(DATA) $(HEADERS)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(bindir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(xenadir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -953,7 +842,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am:
+install-data-am: install-xenaDATA
 
 install-dvi: install-dvi-recursive
 
@@ -999,7 +888,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS
+uninstall-am: uninstall-binPROGRAMS uninstall-xenaDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
 	install-am install-strip tags-recursive
@@ -1013,16 +902,13 @@ uninstall-am: uninstall-binPROGRAMS
 	install-data-am install-dvi install-dvi-am install-exec \
 	install-exec-am install-html install-html-am install-info \
 	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS
+	install-ps install-ps-am install-strip install-xenaDATA \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-xenaDATA
 
-
-# xenadir = $(bindir)
-# xena_DATA = $(EXTRA_DIST)
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -86,12 +86,4 @@ int32_t XtraTService::orderInsert(
   return local_id;
 }
 
-TService* TService::create(
-          const rapidjson::Document& doc,
-          TServiceCallback* callback) {
-  return new XtraTService(doc, callback);
-}
-
-
-
 };  // namespace xena
