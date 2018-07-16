@@ -25,23 +25,45 @@
 //
 
 
-#include "src/options.h"
+#ifndef SRC_XTRA_TSERVICE_H_
+#define SRC_XTRA_TSERVICE_H_
+
+#include "src/tservice.h"
+#include "xtra/TraderService.hh"
 
 namespace xena {
 
-using soil::json::get_item_value;
+class XtraTService :
+      public xtra::TraderCallback,
+      public TService {
+ public:
+  XtraTService(
+      const rapidjson::Document& doc,
+      TServiceCallback* callback);
 
-Options::Options(
-      const rapidjson::Document& doc) {
-  get_item_value(&instru, doc, "/xena/instru");
-  get_item_value(&price, doc, "/xena/price");
-  get_item_value(&volume, doc, "/xena/volume");
-  get_item_value(&interval, doc, "/xena/interval");
-  get_item_value(&count, doc, "/xena/count");
+  virtual ~XtraTService();
 
-  get_item_value(&ts_flag, doc, "/xena/ts_flag");
+  virtual void onRspOrderInsert(
+      const std::string& rsp,
+      const std::string& err_info,
+      int req_id,
+      bool is_last);
 
-  get_item_value(&data_file, doc, "/xena/data_file");
-}
+  virtual void onErrRtnOrderInsert(
+      const std::string& rtn,
+      const std::string& err_info);
+
+  virtual int32_t orderInsert(
+      const std::string& instru,
+      double price,
+      int volume);
+
+ private:
+  std::unique_ptr<xtra::TraderService> service_;
+
+  TServiceCallback* callback_;
+};
 
 };  // namespace xena
+
+#endif  // XENA_XTRA_TSERVICE_HH

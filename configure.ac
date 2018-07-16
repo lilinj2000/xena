@@ -129,7 +129,7 @@ AC_SUBST(SOIL_CPPFLAGS)
 AC_SUBST(SOIL_LIBADD)
 
 dnl foal lib
-FOAL_HOME=$home_libs/foal
+FOAL_HOME=$home_libs/foal_af
 AC_ARG_WITH([foal], 
     [AS_HELP_STRING([--with-foal],
         [home path of the foal, defaults to $FOAL_HOME])],
@@ -138,7 +138,7 @@ AC_ARG_WITH([foal],
 AC_SUBST([FOAL_HOME])
 
 FOAL_CPPFLAGS="-I$FOAL_HOME/include"
-FOAL_LIBADD="$FOAL_HOME/lib/libfoal.la"
+FOAL_LIBADD="$FOAL_HOME/lib/libfoalAF.la"
 AC_SUBST(FOAL_CPPFLAGS)
 AC_SUBST(FOAL_LIBADD)
 

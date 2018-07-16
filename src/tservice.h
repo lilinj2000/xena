@@ -25,23 +25,39 @@
 //
 
 
-#include "src/options.h"
+#ifndef SRC_TSERVICE_H_
+#define SRC_TSERVICE_H_
+
+#include <string>
+#include "soil/json.h"
 
 namespace xena {
 
-using soil::json::get_item_value;
+class TServiceCallback {
+ public:
+  virtual void t1Update(int32_t local_id) = 0;
 
-Options::Options(
-      const rapidjson::Document& doc) {
-  get_item_value(&instru, doc, "/xena/instru");
-  get_item_value(&price, doc, "/xena/price");
-  get_item_value(&volume, doc, "/xena/volume");
-  get_item_value(&interval, doc, "/xena/interval");
-  get_item_value(&count, doc, "/xena/count");
+  virtual void t2Update(int32_t local_id) = 0;
 
-  get_item_value(&ts_flag, doc, "/xena/ts_flag");
+  virtual ~TServiceCallback() {
+  }
+};
 
-  get_item_value(&data_file, doc, "/xena/data_file");
-}
+class TService {
+ public:
+  virtual int32_t orderInsert(
+      const std::string& instru,
+      double price,
+      int volume) = 0;
 
-};  // namespace xena
+  virtual ~TService() {
+  }
+
+  static TService* create(
+      const rapidjson::Document& doc,
+      TServiceCallback* callback);
+};
+
+}  // namespace xena
+
+#endif  // SRC_TSERVICE_H_

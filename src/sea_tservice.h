@@ -25,23 +25,48 @@
 //
 
 
-#include "src/options.h"
+#ifndef SRC_SEA_TSERVICE_H_
+#define SRC_SEA_TSERVICE_H_
+
+#include <map>
+#include "src/tservice.h"
+#include "sea/TraderService.h"
 
 namespace xena {
 
-using soil::json::get_item_value;
+typedef std::map<int, int> TokenRecords;
 
-Options::Options(
-      const rapidjson::Document& doc) {
-  get_item_value(&instru, doc, "/xena/instru");
-  get_item_value(&price, doc, "/xena/price");
-  get_item_value(&volume, doc, "/xena/volume");
-  get_item_value(&interval, doc, "/xena/interval");
-  get_item_value(&count, doc, "/xena/count");
+class SeaTService :
+      public sea::TraderCallback,
+      public TService {
+ public:
+  SeaTService(
+      const rapidjson::Document& doc,
+      TServiceCallback* callback);
 
-  get_item_value(&ts_flag, doc, "/xena/ts_flag");
+  virtual ~SeaTService();
 
-  get_item_value(&data_file, doc, "/xena/data_file");
-}
+  virtual void onOrderAccept(
+      const std::string& theAccept);
+
+  virtual void onOrderReject(
+      const std::string& theReject);
+
+  virtual void onOrderMarketReject(
+      const std::string& theReject);
+
+  virtual int32_t orderInsert(
+      const std::string& instru,
+      double price,
+      int volume);
+
+ private:
+  std::unique_ptr<sea::TraderService> service_;
+  TokenRecords tokens_;
+
+  TServiceCallback* callback_;
+};
 
 };  // namespace xena
+
+#endif  // XENA_SEA_TSERVICE_HH

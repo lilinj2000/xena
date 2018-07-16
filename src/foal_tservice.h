@@ -25,23 +25,45 @@
 //
 
 
-#include "src/options.h"
+#ifndef SRC_FOAL_TSERVICE_H_
+#define SRC_FOAL_TSERVICE_H_
+
+#include "src/tservice.h"
+#include "foal/trader_service.h"
 
 namespace xena {
 
-using soil::json::get_item_value;
+class FoalTService :
+      public foal::TraderCallback,
+      public TService {
+ public:
+  FoalTService(
+      const rapidjson::Document& doc,
+      TServiceCallback* callback);
 
-Options::Options(
-      const rapidjson::Document& doc) {
-  get_item_value(&instru, doc, "/xena/instru");
-  get_item_value(&price, doc, "/xena/price");
-  get_item_value(&volume, doc, "/xena/volume");
-  get_item_value(&interval, doc, "/xena/interval");
-  get_item_value(&count, doc, "/xena/count");
+  virtual ~FoalTService();
 
-  get_item_value(&ts_flag, doc, "/xena/ts_flag");
+  virtual void onRspOrderInsert(
+      const std::string& rsp,
+      const std::string& err_info,
+      int req_id,
+      bool is_last);
 
-  get_item_value(&data_file, doc, "/xena/data_file");
-}
+  virtual void onErrRtnOrderInsert(
+      const std::string& rtn,
+      const std::string& err_info);
+
+  virtual int32_t orderInsert(
+      const std::string& instru,
+      double price,
+      int volume);
+
+ private:
+  std::unique_ptr<foal::TraderService> service_;
+
+  TServiceCallback* callback_;
+};
 
 };  // namespace xena
+
+#endif  // SRC_FOAL_TSERVICE_H_

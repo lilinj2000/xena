@@ -5,14 +5,14 @@ SUBDIRS =
 bin_PROGRAMS = xena
 
 xena_SOURCES = \
-	TimeStampDataFile.cc \
-	Options.cc \
-	Server.cc \
-	Main.cc \
-	FoalTService.cc \
-	SeaTService.cc \
-	XtraTService.cc \
-	TService.cc
+	time_stamp_data_file.cc \
+	options.cc \
+	server.cc \
+	main.cc \
+	foal_tservice.cc \
+	sea_tservice.cc \
+	xtra_tservice.cc \
+	tservice.cc
 
 xena_CPPFLAGS = -I$(top_srcdir) \
 		$(BOOST_CPPFLAGS) \
@@ -38,13 +38,13 @@ xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread
 
 # header files
 noinst_HEADERS = \
-		TimeStampDataFile.hh \
-		Options.hh \
-		Server.hh \
-		TService.hh \
-		FoalTService.hh \
-		SeaTService.hh \
-		XtraTService.hh
+		time_stamp_data_file.h \
+		options.h \
+		server.h \
+		tservice.h \
+		foal_tservice.h \
+		sea_tservice.h \
+		xtra_tservice.h
 
 EXTRA_DIST = fema.json rem.json xele.json
 
