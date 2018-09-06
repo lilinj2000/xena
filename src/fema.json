@@ -5,7 +5,8 @@
         "front_address": "tcp://180.169.101.189:7001", 
         "investor_id": "04452", 
         "password": "111111", 
-        "user_id": "04452"
+        "user_id": "04452",
+        "exchange_id": "SHFE"
     }, 
     "log": {
         "level": "trace", 

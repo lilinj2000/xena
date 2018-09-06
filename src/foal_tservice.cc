@@ -53,6 +53,9 @@ void FoalTService::onRspOrderInsert(
     bool is_last) {
   SOIL_FUNC_TRACE;
 
+  SOIL_DEBUG_PRINT(rsp);
+  SOIL_DEBUG_PRINT(err_info);
+
   rapidjson::Document doc;
   doc.Parse(rsp);
 
@@ -76,6 +79,9 @@ void FoalTService::onErrRtnOrderInsert(
     const std::string& rtn,
     const std::string& err_info) {
   SOIL_FUNC_TRACE;
+
+  SOIL_DEBUG_PRINT(rtn);
+  SOIL_DEBUG_PRINT(err_info);
 
   rapidjson::Document doc;
   doc.Parse(rtn);
