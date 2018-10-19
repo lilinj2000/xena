@@ -24,30 +24,40 @@
 //
 //
 
-#include <stdexcept>
 
-#include "src/foal_tservice.h"
-#include "src/sea_tservice.h"
-#include "src/xtra_tservice.h"
-#include "src/xmas_tservice.h"
-#include "soil/log.h"
+#ifndef SRC_XMAS_TSERVICE_H_
+#define SRC_XMAS_TSERVICE_H_
+
+#include "src/tservice.h"
+#include "xmas/trader_service.h"
 
 namespace xena {
 
-TService* TService::create(
-          const rapidjson::Document& doc,
-          TServiceCallback* callback) {
-  SOIL_FUNC_TRACE;
+class XmasTService :
+      public xmas::TraderCallback,
+      public TService {
+ public:
+  XmasTService(
+      const rapidjson::Document& doc,
+      TServiceCallback* callback);
 
-  if (doc.HasMember("foal_trader")) {
-    return new FoalTService(doc, callback);
-  } else if (doc.HasMember("sea_trader")) {
-    return new SeaTService(doc, callback);
-  } else if (doc.HasMember("xmas_trader")) {
-    return new XmasTService(doc, callback);
-  } else {
-    throw std::runtime_error("no supported TService!!!");
-  }
-}
+  virtual ~XmasTService();
+
+  virtual void onRspInsertOrder(
+      const std::string& rsp,
+      const std::string& err_info);
+
+  virtual int32_t orderInsert(
+      const std::string& instru,
+      double price,
+      int volume);
+
+ private:
+  std::unique_ptr<xmas::TraderService> service_;
+
+  TServiceCallback* callback_;
+};
 
 };  // namespace xena
+
+#endif  // SRC_XMAS_TSERVICE_H_

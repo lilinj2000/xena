@@ -170,6 +170,20 @@ XTRA_LIBADD="$XTRA_HOME/lib/libxtra.la"
 AC_SUBST(XTRA_CPPFLAGS)
 AC_SUBST(XTRA_LIBADD)
 
+dnl xmas lib
+XMAS_HOME=$home_libs/xmas
+AC_ARG_WITH([xmas], 
+    [AS_HELP_STRING([--with-xmas],
+        [home path of the xtra, defaults to $XMAS_HOME])],
+    [XMAS_HOME="$withval"],
+    [XMAS_HOME="$XMAS_HOME"])
+AC_SUBST([XMAS_HOME])
+
+XMAS_CPPFLAGS="-I$XMAS_HOME/include"
+XMAS_LIBADD="$XMAS_HOME/lib/libxmas.la"
+AC_SUBST(XMAS_CPPFLAGS)
+AC_SUBST(XMAS_LIBADD)
+
 AC_OUTPUT([
 	Makefile
 	src/Makefile])

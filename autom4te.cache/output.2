@@ -636,6 +636,9 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIB@&t@OBJS
+XMAS_LIBADD
+XMAS_CPPFLAGS
+XMAS_HOME
 XTRA_LIBADD
 XTRA_CPPFLAGS
 XTRA_HOME
@@ -808,6 +811,7 @@ with_soil
 with_foal
 with_sea
 with_xtra
+with_xmas
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1473,6 +1477,7 @@ Optional Packages:
   --with-foal             home path of the foal, defaults to @S|@FOAL_HOME
   --with-sea              home path of the sea, defaults to @S|@SEA_HOME
   --with-xtra             home path of the xtra, defaults to @S|@XTRA_HOME
+  --with-xmas             home path of the xtra, defaults to @S|@XMAS_HOME
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -15480,6 +15485,22 @@ fi
 
 XTRA_CPPFLAGS="-I$XTRA_HOME/include"
 XTRA_LIBADD="$XTRA_HOME/lib/libxtra.la"
+
+
+
+XMAS_HOME=$home_libs/xmas
+
+@%:@ Check whether --with-xmas was given.
+if test "${with_xmas+set}" = set; then :
+  withval=$with_xmas; XMAS_HOME="$withval"
+else
+  XMAS_HOME="$XMAS_HOME"
+fi
+
+
+
+XMAS_CPPFLAGS="-I$XMAS_HOME/include"
+XMAS_LIBADD="$XMAS_HOME/lib/libxmas.la"
 
 
 

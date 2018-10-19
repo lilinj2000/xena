@@ -1,0 +1,36 @@
+{
+    "xmas_trader": {
+        "front_address": "tcp://180.169.101.189:7001", 
+        "account_id": "000100000001", 
+        "password": "123456"
+    }, 
+    "log": {
+        "level": "trace", 
+        "sinks": [
+            {
+                "sink": {
+                    "level": "trace", 
+                    "type": "stdout_sink_mt"
+                }
+            }, 
+            {
+                "sink": {
+                    "file_name": "xena.log", 
+                    "level": "info", 
+                    "max_file_size": 5000000, 
+                    "max_files": 10, 
+                    "type": "rotating_file_sink_mt"
+                }
+            }
+        ]
+    }, 
+    "xena": {
+        "count": 1, 
+        "data_file": "xena_data.txt", 
+        "instru": "IF1712", 
+        "interval": 2000, 
+        "price": 3790, 
+        "ts_flag": 1, 
+        "volume": 1
+    }
+}
