@@ -25,8 +25,8 @@
 //
 
 
-#ifndef SRC_TIMESTAMP_DATA_FILE_H_
-#define SRC_TIMESTAMP_DATA_FILE_H_
+#ifndef SRC_TIME_STAMP_DATA_FILE_H_
+#define SRC_TIME_STAMP_DATA_FILE_H_
 
 #include <string>
 #include <set>
@@ -90,4 +90,4 @@ class TimeStampDataFile : public soil::DataFile {
 
 };  // namespace xena
 
-#endif
+#endif  // SRC_TIME_STAMP_DATA_FILE_H_

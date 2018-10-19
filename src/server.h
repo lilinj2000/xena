@@ -82,4 +82,4 @@ class Server :
 
 }  // namespace xena
 
-#endif
+#endif  // SRC_SERVER_H_

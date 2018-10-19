@@ -28,7 +28,9 @@
 #ifndef SRC_SEA_TSERVICE_H_
 #define SRC_SEA_TSERVICE_H_
 
+#include <string>
 #include <map>
+
 #include "src/tservice.h"
 #include "sea/TraderService.h"
 
@@ -69,4 +71,4 @@ class SeaTService :
 
 };  // namespace xena
 
-#endif  // XENA_SEA_TSERVICE_HH
+#endif  // SRC_SEA_TSERVICE_H_

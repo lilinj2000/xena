@@ -28,6 +28,8 @@
 #ifndef SRC_FOAL_TSERVICE_H_
 #define SRC_FOAL_TSERVICE_H_
 
+#include <string>
+
 #include "src/tservice.h"
 #include "foal/trader_service.h"
 

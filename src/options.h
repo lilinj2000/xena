@@ -59,4 +59,4 @@ class Options {
 
 };  // namespace xena
 
-#endif
+#endif  // SRC_OPTIONS_H_

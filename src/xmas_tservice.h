@@ -28,6 +28,8 @@
 #ifndef SRC_XMAS_TSERVICE_H_
 #define SRC_XMAS_TSERVICE_H_
 
+#include <string>
+
 #include "src/tservice.h"
 #include "xmas/trader_service.h"
 

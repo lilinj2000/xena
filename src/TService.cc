@@ -26,11 +26,14 @@
 
 #include <stdexcept>
 
+#include "src/tservice.h"
+
 #include "src/foal_tservice.h"
 #include "src/sea_tservice.h"
 #include "src/xtra_tservice.h"
 #include "src/xmas_tservice.h"
 #include "soil/log.h"
+
 
 namespace xena {
 

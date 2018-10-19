@@ -28,6 +28,8 @@
 #ifndef SRC_XTRA_TSERVICE_H_
 #define SRC_XTRA_TSERVICE_H_
 
+#include <string>
+
 #include "src/tservice.h"
 #include "xtra/TraderService.hh"
 
@@ -66,4 +68,4 @@ class XtraTService :
 
 };  // namespace xena
 
-#endif  // XENA_XTRA_TSERVICE_HH
+#endif  // SRC_XTRA_TSERVICE_H_
