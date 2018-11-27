@@ -1,0 +1,46 @@
+{
+    "ufo": {
+        "account": "00011",
+        "exchange_type": 1,
+        "flow_path": "./",
+        "heartbt_freq": 0,
+        "local_host": "192.168.230.129",
+        "notify_port": 40012,
+        "password": "111111",
+        "reconn_timeout": 0,
+        "req_port": 40010,
+        "rsp_port": 40011,
+        "svr_host": "192.168.230.137",
+        "svr_port": 4444,
+        "timestamp_flag": 0
+    },
+    "log": {
+        "level": "trace", 
+        "sinks": [
+            {
+                "sink": {
+                    "level": "trace", 
+                    "type": "stdout_sink_mt"
+                }
+            }, 
+            {
+                "sink": {
+                    "file_name": "xena.log", 
+                    "level": "info", 
+                    "max_file_size": 5000000, 
+                    "max_files": 10, 
+                    "type": "rotating_file_sink_mt"
+                }
+            }
+        ]
+    }, 
+    "xena": {
+        "count": 1, 
+        "data_file": "xena_data.txt", 
+        "instru": "IF1712", 
+        "interval": 2000, 
+        "price": 3790, 
+        "ts_flag": 1, 
+        "volume": 1
+    }
+}

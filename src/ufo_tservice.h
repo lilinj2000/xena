@@ -24,36 +24,42 @@
 //
 //
 
-#include <stdexcept>
+
+#ifndef SRC_UFO_TSERVICE_H_
+#define SRC_UFO_TSERVICE_H_
+
+#include <string>
 
 #include "src/tservice.h"
-
-#include "src/foal_tservice.h"
-#include "src/sea_tservice.h"
-#include "src/xtra_tservice.h"
-#include "src/xmas_tservice.h"
-#include "src/ufo_tservice.h"
-#include "soil/log.h"
-
+#include "ufo/trader_service.h"
 
 namespace xena {
 
-TService* TService::create(
-          const rapidjson::Document& doc,
-          TServiceCallback* callback) {
-  SOIL_FUNC_TRACE;
+class UfoTService :
+      public ufo::TraderCallback,
+      public TService {
+ public:
+  UfoTService(
+      const rapidjson::Document& doc,
+      TServiceCallback* callback);
 
-  if (doc.HasMember("foal_trader")) {
-    return new FoalTService(doc, callback);
-  } else if (doc.HasMember("sea_trader")) {
-    return new SeaTService(doc, callback);
-  } else if (doc.HasMember("xmas_trader")) {
-    return new XmasTService(doc, callback);
-  } else if (doc.HasMember("ufo")) {
-    return new UfoTService(doc, callback);
-  } else {
-    throw std::runtime_error("no supported TService!!!");
-  }
-}
+  virtual ~UfoTService();
+
+  virtual void onAnsOrderInsert(
+      const std::string& rsp,
+      const std::string& err_info);
+
+  virtual int32_t orderInsert(
+      const std::string& instru,
+      double price,
+      int volume);
+
+ private:
+  std::unique_ptr<ufo::TraderService> service_;
+
+  TServiceCallback* callback_;
+};
 
 };  // namespace xena
+
+#endif  // SRC_UFO_TSERVICE_H_

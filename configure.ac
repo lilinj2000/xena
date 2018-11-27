@@ -184,6 +184,20 @@ XMAS_LIBADD="$XMAS_HOME/lib/libxmas.la"
 AC_SUBST(XMAS_CPPFLAGS)
 AC_SUBST(XMAS_LIBADD)
 
+dnl ufo lib
+UFO_HOME=$home_libs/ufo
+AC_ARG_WITH([ufo], 
+    [AS_HELP_STRING([--with-ufo],
+        [home path of the xtra, defaults to $UFO_HOME])],
+    [UFO_HOME="$withval"],
+    [UFO_HOME="$UFO_HOME"])
+AC_SUBST([UFO_HOME])
+
+UFO_CPPFLAGS="-I$UFO_HOME/include"
+UFO_LIBADD="$UFO_HOME/lib/libufo.la"
+AC_SUBST(UFO_CPPFLAGS)
+AC_SUBST(UFO_LIBADD)
+
 AC_OUTPUT([
 	Makefile
 	src/Makefile])
