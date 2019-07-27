@@ -188,7 +188,7 @@ dnl ufo lib
 UFO_HOME=$home_libs/ufo
 AC_ARG_WITH([ufo], 
     [AS_HELP_STRING([--with-ufo],
-        [home path of the xtra, defaults to $UFO_HOME])],
+        [home path of the ufo, defaults to $UFO_HOME])],
     [UFO_HOME="$withval"],
     [UFO_HOME="$UFO_HOME"])
 AC_SUBST([UFO_HOME])
@@ -197,6 +197,19 @@ UFO_CPPFLAGS="-I$UFO_HOME/include"
 UFO_LIBADD="$UFO_HOME/lib/libufo.la"
 AC_SUBST(UFO_CPPFLAGS)
 AC_SUBST(UFO_LIBADD)
+
+dnl yet lib
+YET_HOME=$home_libs/yet
+AC_ARG_WITH([yet], 
+    [AS_HELP_STRING([--with-yet],
+        [home path of the yet, defaults to $YET_HOME])],
+    [YET_HOME="$withval"],
+    [YET_HOME="$YET_HOME"])
+AC_SUBST([YET_HOME])
+YET_CPPFLAGS="-I$YET_HOME/include"
+YET_LIBADD="$YET_HOME/lib/libyet.la"
+AC_SUBST(YET_CPPFLAGS)
+AC_SUBST(YET_LIBADD)
 
 AC_OUTPUT([
 	Makefile

@@ -636,6 +636,9 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
+YET_LIBADD
+YET_CPPFLAGS
+YET_HOME
 UFO_LIBADD
 UFO_CPPFLAGS
 UFO_HOME
@@ -816,6 +819,7 @@ with_sea
 with_xtra
 with_xmas
 with_ufo
+with_yet
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1482,7 +1486,8 @@ Optional Packages:
   --with-sea              home path of the sea, defaults to $SEA_HOME
   --with-xtra             home path of the xtra, defaults to $XTRA_HOME
   --with-xmas             home path of the xtra, defaults to $XMAS_HOME
-  --with-ufo              home path of the xtra, defaults to $UFO_HOME
+  --with-ufo              home path of the ufo, defaults to $UFO_HOME
+  --with-yet              home path of the yet, defaults to $YET_HOME
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -15522,6 +15527,21 @@ fi
 
 UFO_CPPFLAGS="-I$UFO_HOME/include"
 UFO_LIBADD="$UFO_HOME/lib/libufo.la"
+
+
+
+YET_HOME=$home_libs/yet
+
+# Check whether --with-yet was given.
+if test "${with_yet+set}" = set; then :
+  withval=$with_yet; YET_HOME="$withval"
+else
+  YET_HOME="$YET_HOME"
+fi
+
+
+YET_CPPFLAGS="-I$YET_HOME/include"
+YET_LIBADD="$YET_HOME/lib/libyet.la"
 
 
 

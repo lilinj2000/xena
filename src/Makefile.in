@@ -101,13 +101,14 @@ am_xena_OBJECTS = xena-time_stamp_data_file.$(OBJEXT) \
 	xena-main.$(OBJEXT) xena-foal_tservice.$(OBJEXT) \
 	xena-sea_tservice.$(OBJEXT) xena-xtra_tservice.$(OBJEXT) \
 	xena-xmas_tservice.$(OBJEXT) xena-ufo_tservice.$(OBJEXT) \
-	xena-tservice.$(OBJEXT)
+	xena-yet_tservice.$(OBJEXT) xena-tservice.$(OBJEXT)
 xena_OBJECTS = $(am_xena_OBJECTS)
 am__DEPENDENCIES_1 =
 xena_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -350,6 +351,9 @@ XMAS_LIBADD = @XMAS_LIBADD@
 XTRA_CPPFLAGS = @XTRA_CPPFLAGS@
 XTRA_HOME = @XTRA_HOME@
 XTRA_LIBADD = @XTRA_LIBADD@
+YET_CPPFLAGS = @YET_CPPFLAGS@
+YET_HOME = @YET_HOME@
+YET_LIBADD = @YET_LIBADD@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -415,6 +419,7 @@ xena_SOURCES = \
 	xtra_tservice.cc \
 	xmas_tservice.cc \
 	ufo_tservice.cc \
+	yet_tservice.cc \
 	tservice.cc
 
 xena_CPPFLAGS = -I$(top_srcdir) \
@@ -429,7 +434,8 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 		$(SEA_CPPFLAGS) \
 		$(XTRA_CPPFLAGS) \
 		$(XMAS_CPPFLAGS) \
-		$(UFO_CPPFLAGS)
+		$(UFO_CPPFLAGS) \
+		$(YET_CPPFLAGS)
 
 xena_LDADD = \
 	$(BOOST_LIBADD) \
@@ -439,7 +445,8 @@ xena_LDADD = \
 	$(SEA_LIBADD) \
 	$(XTRA_LIBADD) \
 	$(XMAS_LIBADD) \
-	$(UFO_LIBADD)
+	$(UFO_LIBADD) \
+	$(YET_LIBADD)
 
 xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread -luuid
 
@@ -452,9 +459,10 @@ noinst_HEADERS = \
 		foal_tservice.h \
 		sea_tservice.h \
 		xtra_tservice.h \
-		ufo_tservice.h
+		ufo_tservice.h \
+		yet_tservice.h
 
-EXTRA_DIST = fema.json rem.json xele.json xone.json nst.json
+EXTRA_DIST = fema.json rem.json xele.json xone.json nst.json yet.json yd.txt
 xenadir = $(bindir)
 xena_DATA = $(EXTRA_DIST)
 all: all-recursive
@@ -561,6 +569,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-ufo_tservice.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-xmas_tservice.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-xtra_tservice.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-yet_tservice.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -708,6 +717,20 @@ xena-ufo_tservice.obj: ufo_tservice.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='ufo_tservice.cc' object='xena-ufo_tservice.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-ufo_tservice.obj `if test -f 'ufo_tservice.cc'; then $(CYGPATH_W) 'ufo_tservice.cc'; else $(CYGPATH_W) '$(srcdir)/ufo_tservice.cc'; fi`
+
+xena-yet_tservice.o: yet_tservice.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-yet_tservice.o -MD -MP -MF $(DEPDIR)/xena-yet_tservice.Tpo -c -o xena-yet_tservice.o `test -f 'yet_tservice.cc' || echo '$(srcdir)/'`yet_tservice.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/xena-yet_tservice.Tpo $(DEPDIR)/xena-yet_tservice.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yet_tservice.cc' object='xena-yet_tservice.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-yet_tservice.o `test -f 'yet_tservice.cc' || echo '$(srcdir)/'`yet_tservice.cc
+
+xena-yet_tservice.obj: yet_tservice.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-yet_tservice.obj -MD -MP -MF $(DEPDIR)/xena-yet_tservice.Tpo -c -o xena-yet_tservice.obj `if test -f 'yet_tservice.cc'; then $(CYGPATH_W) 'yet_tservice.cc'; else $(CYGPATH_W) '$(srcdir)/yet_tservice.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/xena-yet_tservice.Tpo $(DEPDIR)/xena-yet_tservice.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yet_tservice.cc' object='xena-yet_tservice.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-yet_tservice.obj `if test -f 'yet_tservice.cc'; then $(CYGPATH_W) 'yet_tservice.cc'; else $(CYGPATH_W) '$(srcdir)/yet_tservice.cc'; fi`
 
 xena-tservice.o: tservice.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-tservice.o -MD -MP -MF $(DEPDIR)/xena-tservice.Tpo -c -o xena-tservice.o `test -f 'tservice.cc' || echo '$(srcdir)/'`tservice.cc

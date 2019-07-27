@@ -1,0 +1,14 @@
+RunPosition=WAN
+#RunPosition=LAN
+#RunPosition=ExasockLAN
+#RunPosition=OnloadLAN
+
+TradingServerIP=202.96.204.70
+# shfe 41000
+# cffex 40000
+TradingServerPort=41000
+# UDPMarketDataClientIP=127.0.0.1
+# TCPTradingCPUID=-1
+# TCPMarketDataCPUID=-1
+# UDPMarketDataCPUID=-1
+

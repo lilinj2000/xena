@@ -1,0 +1,37 @@
+{
+    "log": {
+        "level": "trace", 
+        "sinks": [
+            {
+                "sink": {
+                    "level": "trace", 
+                    "type": "stdout_sink_mt"
+                }
+            }, 
+            {
+                "sink": {
+                    "file_name": "yet.log", 
+                    "max_file_size": 5000000, 
+                    "max_files": 10, 
+                    "type": "rotating_file_sink_mt"
+                }
+            }
+        ]
+    }, 
+    "yet": {
+        "account": "066", 
+        "app_id": "yd_dev_1.0", 
+        "authenticate_id": "ecbf8f06469eba63956b79705d95a603", 
+        "config_file": "yd.txt", 
+        "password": "066"
+    },
+    "xena": {
+        "count": 1, 
+        "data_file": "yet_data.txt", 
+        "instru": "cu1906", 
+        "interval": 2000, 
+        "price": 3400, 
+        "ts_flag": 1, 
+        "volume": 4
+    }
+}

@@ -14,6 +14,7 @@ xena_SOURCES = \
 	xtra_tservice.cc \
 	xmas_tservice.cc \
 	ufo_tservice.cc \
+	yet_tservice.cc \
 	tservice.cc
 
 xena_CPPFLAGS = -I$(top_srcdir) \
@@ -28,7 +29,8 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 		$(SEA_CPPFLAGS) \
 		$(XTRA_CPPFLAGS) \
 		$(XMAS_CPPFLAGS) \
-		$(UFO_CPPFLAGS)
+		$(UFO_CPPFLAGS) \
+		$(YET_CPPFLAGS)
 
 xena_LDADD = \
 	$(BOOST_LIBADD) \
@@ -38,7 +40,8 @@ xena_LDADD = \
 	$(SEA_LIBADD) \
 	$(XTRA_LIBADD) \
 	$(XMAS_LIBADD) \
-	$(UFO_LIBADD)
+	$(UFO_LIBADD) \
+	$(YET_LIBADD)
 
 xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread -luuid
 
@@ -51,9 +54,10 @@ noinst_HEADERS = \
 		foal_tservice.h \
 		sea_tservice.h \
 		xtra_tservice.h \
-		ufo_tservice.h
-
-EXTRA_DIST = fema.json rem.json xele.json xone.json nst.json
+		ufo_tservice.h \
+		yet_tservice.h
+ 
+EXTRA_DIST = fema.json rem.json xele.json xone.json nst.json yet.json yd.txt
 
 xenadir = $(bindir)
 xena_DATA = $(EXTRA_DIST)

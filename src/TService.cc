@@ -28,19 +28,18 @@
 
 #include "src/tservice.h"
 
+#include "soil/log.h"
 #include "src/foal_tservice.h"
 #include "src/sea_tservice.h"
-#include "src/xtra_tservice.h"
-#include "src/xmas_tservice.h"
 #include "src/ufo_tservice.h"
-#include "soil/log.h"
-
+#include "src/xmas_tservice.h"
+#include "src/xtra_tservice.h"
+#include "src/yet_tservice.h"
 
 namespace xena {
 
-TService* TService::create(
-          const rapidjson::Document& doc,
-          TServiceCallback* callback) {
+TService *TService::create(const rapidjson::Document &doc,
+                           TServiceCallback *callback) {
   SOIL_FUNC_TRACE;
 
   if (doc.HasMember("foal_trader")) {
@@ -51,9 +50,11 @@ TService* TService::create(
     return new XmasTService(doc, callback);
   } else if (doc.HasMember("ufo")) {
     return new UfoTService(doc, callback);
+  } else if (doc.HasMember("yet")) {
+    return new YetTService(doc, callback);
   } else {
     throw std::runtime_error("no supported TService!!!");
   }
 }
 
-};  // namespace xena
+}; // namespace xena
