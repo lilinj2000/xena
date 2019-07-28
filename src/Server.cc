@@ -92,7 +92,8 @@ void Server::run() {
     }
   }while(true);
 
-  wait(options_->interval);
+  // the last package just wait 2 seconds
+  wait(2000);
 }
 
 void Server::updateT(

@@ -53,7 +53,7 @@ void YetTService::notifyOrder(const std::string &theOrder,
   rapidjson::Document doc;
   doc.Parse(theOrder);
 
-  std::string key = "/YDOrder/OrderLocalID";
+  std::string key = "/YDOrder/YDInputOrder/OrderRef";
 
   int32_t order_local_id;
   soil::json::get_item_value(&order_local_id, doc, key);
