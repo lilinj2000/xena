@@ -52,7 +52,7 @@ class YetTService :
   virtual int32_t orderInsert(
       const std::string& instru,
       double price,
-      int volume);
+      int volume, bool fok);
 
  private:
   std::unique_ptr<yet::TraderService> service_;

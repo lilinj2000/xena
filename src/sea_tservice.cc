@@ -109,12 +109,18 @@ void SeaTService::onOrderMarketReject(const std::string &theReject) {
 }
 
 int32_t SeaTService::orderInsert(const std::string &instru, double price,
-                                 int volume) {
+                                 int volume, bool fok) {
   SOIL_FUNC_TRACE;
 
-  int32_t local_id = service_->openBuyOrderFOK(instru, price, volume);
+  int32_t local_id = -1;
+
+  if (fok) {
+    local_id = service_->openBuyOrderFOK(instru, price, volume);
+  } else {
+    local_id = service_->openBuyOrderFAK(instru, price, volume);
+  }
 
   return local_id;
 }
 
-};  // namespace xena
+}; // namespace xena

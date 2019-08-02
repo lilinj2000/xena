@@ -43,6 +43,8 @@ class Options {
   int interval;
   int count;
 
+  bool fok;
+
   // 1: only t1
   // 2: only t2
   // 3: both

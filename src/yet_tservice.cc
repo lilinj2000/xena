@@ -64,7 +64,7 @@ void YetTService::notifyOrder(const std::string &theOrder,
 }
 
 int32_t YetTService::orderInsert(const std::string &instru, double price,
-                                 int volume) {
+                                 int volume, bool fok) {
   SOIL_FUNC_TRACE;
 
   int32_t order_ref = service_->openBuyOrderFAK(instru, price, volume);

@@ -24,33 +24,24 @@
 //
 //
 
-
 #include "src/foal_tservice.h"
 #include "soil/log.h"
 
 namespace xena {
 
-FoalTService::FoalTService(
-    const rapidjson::Document& doc,
-    TServiceCallback* callback) :
-    callback_(callback) {
+FoalTService::FoalTService(const rapidjson::Document &doc,
+                           TServiceCallback *callback)
+    : callback_(callback) {
   SOIL_FUNC_TRACE;
 
-  service_.reset(
-      foal::TraderService::create(
-          doc,
-          this));
+  service_.reset(foal::TraderService::create(doc, this));
 }
 
-FoalTService::~FoalTService() {
-  SOIL_FUNC_TRACE;
-}
+FoalTService::~FoalTService() { SOIL_FUNC_TRACE; }
 
-void FoalTService::onRspOrderInsert(
-    const std::string& rsp,
-    const std::string& err_info,
-    int req_id,
-    bool is_last) {
+void FoalTService::onRspOrderInsert(const std::string &rsp,
+                                    const std::string &err_info, int req_id,
+                                    bool is_last) {
   SOIL_FUNC_TRACE;
 
   SOIL_DEBUG_PRINT(rsp);
@@ -59,14 +50,10 @@ void FoalTService::onRspOrderInsert(
   rapidjson::Document doc;
   doc.Parse(rsp);
 
-  std::string key
-      = "/CUstpFtdcInputOrderField/UserOrderLocalID";
+  std::string key = "/CUstpFtdcInputOrderField/UserOrderLocalID";
 
   std::string order_local_id;
-  soil::json::get_item_value(
-      &order_local_id,
-      doc,
-      key);
+  soil::json::get_item_value(&order_local_id, doc, key);
 
   int32_t order_ref = std::stoi(order_local_id);
 
@@ -75,9 +62,8 @@ void FoalTService::onRspOrderInsert(
   }
 }
 
-void FoalTService::onErrRtnOrderInsert(
-    const std::string& rtn,
-    const std::string& err_info) {
+void FoalTService::onErrRtnOrderInsert(const std::string &rtn,
+                                       const std::string &err_info) {
   SOIL_FUNC_TRACE;
 
   SOIL_DEBUG_PRINT(rtn);
@@ -86,14 +72,10 @@ void FoalTService::onErrRtnOrderInsert(
   rapidjson::Document doc;
   doc.Parse(rtn);
 
-  std::string key
-      = "/CUstpFtdcInputOrderField/UserOrderLocalID";
+  std::string key = "/CUstpFtdcInputOrderField/UserOrderLocalID";
 
   std::string order_local_id;
-  soil::json::get_item_value(
-      &order_local_id,
-      doc,
-      key);
+  soil::json::get_item_value(&order_local_id, doc, key);
 
   int32_t order_ref = std::stoi(order_local_id);
 
@@ -102,18 +84,18 @@ void FoalTService::onErrRtnOrderInsert(
   }
 }
 
-int32_t FoalTService::orderInsert(
-    const std::string& instru,
-    double price,
-    int volume) {
+int32_t FoalTService::orderInsert(const std::string &instru, double price,
+                                  int volume, bool fok) {
   SOIL_FUNC_TRACE;
 
-  int32_t order_ref = service_->openBuyOrderFOK(
-      instru,
-      price,
-      volume);
+  int32_t order_ref = -1;
+  if (fok) {
+    order_ref = service_->openBuyOrderFOK(instru, price, volume);
+  } else {
+    order_ref = service_->openBuyOrderFAK(instru, price, volume);
+  }
 
   return order_ref;
 }
 
-};  // namespace xena
+}; // namespace xena

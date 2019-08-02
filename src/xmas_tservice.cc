@@ -26,30 +26,23 @@
 
 #include <string>
 
-#include "src/xmas_tservice.h"
 #include "soil/log.h"
+#include "src/xmas_tservice.h"
 
 namespace xena {
 
-XmasTService::XmasTService(
-    const rapidjson::Document& doc,
-    TServiceCallback* callback) :
-    callback_(callback) {
+XmasTService::XmasTService(const rapidjson::Document &doc,
+                           TServiceCallback *callback)
+    : callback_(callback) {
   SOIL_FUNC_TRACE;
 
-  service_.reset(
-      xmas::TraderService::create(
-          doc,
-          this));
+  service_.reset(xmas::TraderService::create(doc, this));
 }
 
-XmasTService::~XmasTService() {
-  SOIL_FUNC_TRACE;
-}
+XmasTService::~XmasTService() { SOIL_FUNC_TRACE; }
 
-void XmasTService::onRspInsertOrder(
-    const std::string& rsp,
-    const std::string& err_info) {
+void XmasTService::onRspInsertOrder(const std::string &rsp,
+                                    const std::string &err_info) {
   SOIL_FUNC_TRACE;
 
   SOIL_DEBUG_PRINT(rsp);
@@ -58,32 +51,28 @@ void XmasTService::onRspInsertOrder(
   rapidjson::Document doc;
   doc.Parse(rsp);
 
-  std::string key
-      = "/CX1FtdcRspOperOrderField/LocalOrderID";
+  std::string key = "/CX1FtdcRspOperOrderField/LocalOrderID";
 
   int32_t order_local_id;
-  soil::json::get_item_value(
-      &order_local_id,
-      doc,
-      key);
+  soil::json::get_item_value(&order_local_id, doc, key);
 
   if (callback_) {
     callback_->t1Update(order_local_id);
   }
 }
 
-int32_t XmasTService::orderInsert(
-    const std::string& instru,
-    double price,
-    int volume) {
+int32_t XmasTService::orderInsert(const std::string &instru, double price,
+                                  int volume, bool fok) {
   SOIL_FUNC_TRACE;
 
-  int32_t order_ref = service_->openBuyOrderFOK(
-      instru,
-      price,
-      volume);
+  int32_t order_ref = -1;
+  if (fok) {
+    order_ref = service_->openBuyOrderFOK(instru, price, volume);
+  } else {
+    order_ref = service_->openBuyOrderFAK(instru, price, volume);
+  }
 
   return order_ref;
 }
 
-};  // namespace xena
+}; // namespace xena

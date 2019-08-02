@@ -78,7 +78,8 @@ void Server::run() {
     int32_t local_id = tservice_->orderInsert(
         options_->instru,
         options_->price,
-        options_->volume);
+        options_->volume,
+        options_->fok);
 
     records_[local_id]
         = std::shared_ptr<TimeStampData>(

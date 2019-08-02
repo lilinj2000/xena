@@ -24,18 +24,17 @@
 //
 //
 
-
 #include "src/options.h"
 
 namespace xena {
 
 using soil::json::get_item_value;
 
-Options::Options(
-      const rapidjson::Document& doc) {
+Options::Options(const rapidjson::Document &doc): fok(true) {
   get_item_value(&instru, doc, "/xena/instru");
   get_item_value(&price, doc, "/xena/price");
   get_item_value(&volume, doc, "/xena/volume");
+  get_item_value(&fok, doc, "/xena/fok", false);
   get_item_value(&interval, doc, "/xena/interval");
   get_item_value(&count, doc, "/xena/count");
 
@@ -44,4 +43,4 @@ Options::Options(
   get_item_value(&data_file, doc, "/xena/data_file");
 }
 
-};  // namespace xena
+}; // namespace xena

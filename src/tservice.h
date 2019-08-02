@@ -48,7 +48,7 @@ class TService {
   virtual int32_t orderInsert(
       const std::string& instru,
       double price,
-      int volume) = 0;
+      int volume, bool fok) = 0;
 
   virtual ~TService() {
   }
