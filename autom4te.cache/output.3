@@ -636,6 +636,9 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIB@&t@OBJS
+CATA_LIBADD
+CATA_CPPFLAGS
+CATA_HOME
 YET_LIBADD
 YET_CPPFLAGS
 YET_HOME
@@ -820,6 +823,7 @@ with_xtra
 with_xmas
 with_ufo
 with_yet
+with_cata
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1488,6 +1492,7 @@ Optional Packages:
   --with-xmas             home path of the xtra, defaults to @S|@XMAS_HOME
   --with-ufo              home path of the ufo, defaults to @S|@UFO_HOME
   --with-yet              home path of the yet, defaults to @S|@YET_HOME
+  --with-cata             home path of the cata, defaults to @S|@CATA_HOME
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -15542,6 +15547,21 @@ fi
 
 YET_CPPFLAGS="-I$YET_HOME/include"
 YET_LIBADD="$YET_HOME/lib/libyet.la"
+
+
+
+CATA_HOME=$home_libs/cata
+
+@%:@ Check whether --with-cata was given.
+if test "${with_cata+set}" = set; then :
+  withval=$with_cata; CATA_HOME="$withval"
+else
+  CATA_HOME="$CATA_HOME"
+fi
+
+
+CATA_CPPFLAGS="-I$CATA_HOME/include"
+CATA_LIBADD="$CATA_HOME/lib/libcata_trader.la"
 
 
 

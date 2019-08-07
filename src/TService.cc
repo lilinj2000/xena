@@ -29,6 +29,7 @@
 #include "src/tservice.h"
 
 #include "soil/log.h"
+#include "src/cata_tservice.h"
 #include "src/foal_tservice.h"
 #include "src/sea_tservice.h"
 #include "src/ufo_tservice.h"
@@ -52,6 +53,8 @@ TService *TService::create(const rapidjson::Document &doc,
     return new UfoTService(doc, callback);
   } else if (doc.HasMember("yet")) {
     return new YetTService(doc, callback);
+  } else if (doc.HasMember("cata_trader")) {
+    return new CataTService(doc, callback);
   } else {
     throw std::runtime_error("no supported TService!!!");
   }

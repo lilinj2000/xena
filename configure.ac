@@ -211,6 +211,19 @@ YET_LIBADD="$YET_HOME/lib/libyet.la"
 AC_SUBST(YET_CPPFLAGS)
 AC_SUBST(YET_LIBADD)
 
+dnl cata lib
+CATA_HOME=$home_libs/cata
+AC_ARG_WITH([cata], 
+    [AS_HELP_STRING([--with-cata],
+        [home path of the cata, defaults to $CATA_HOME])],
+    [CATA_HOME="$withval"],
+    [CATA_HOME="$CATA_HOME"])
+AC_SUBST([CATA_HOME])
+CATA_CPPFLAGS="-I$CATA_HOME/include"
+CATA_LIBADD="$CATA_HOME/lib/libcata_trader.la"
+AC_SUBST(CATA_CPPFLAGS)
+AC_SUBST(CATA_LIBADD)
+
 AC_OUTPUT([
 	Makefile
 	src/Makefile])
