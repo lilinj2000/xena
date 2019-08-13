@@ -224,6 +224,19 @@ CATA_LIBADD="$CATA_HOME/lib/libcata_trader.la"
 AC_SUBST(CATA_CPPFLAGS)
 AC_SUBST(CATA_LIBADD)
 
+dnl esau lib
+ESAU_HOME=$home_libs/esau
+AC_ARG_WITH([esau], 
+    [AS_HELP_STRING([--with-esau],
+        [home path of the esau, defaults to $ESAU_HOME])],
+    [ESAU_HOME="$withval"],
+    [ESAU_HOME="$ESAU_HOME"])
+AC_SUBST([ESAU_HOME])
+ESAU_CPPFLAGS="-I$ESAU_HOME/include"
+ESAU_LIBADD="$ESAU_HOME/lib/libesau.la"
+AC_SUBST(ESAU_CPPFLAGS)
+AC_SUBST(ESAU_LIBADD)
+
 AC_OUTPUT([
 	Makefile
 	src/Makefile])

@@ -102,14 +102,15 @@ am_xena_OBJECTS = xena-time_stamp_data_file.$(OBJEXT) \
 	xena-sea_tservice.$(OBJEXT) xena-xtra_tservice.$(OBJEXT) \
 	xena-xmas_tservice.$(OBJEXT) xena-ufo_tservice.$(OBJEXT) \
 	xena-yet_tservice.$(OBJEXT) xena-cata_tservice.$(OBJEXT) \
-	xena-tservice.$(OBJEXT)
+	xena-esau_tservice.$(OBJEXT) xena-tservice.$(OBJEXT)
 xena_OBJECTS = $(am_xena_OBJECTS)
 am__DEPENDENCIES_1 =
 xena_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -284,6 +285,9 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+ESAU_CPPFLAGS = @ESAU_CPPFLAGS@
+ESAU_HOME = @ESAU_HOME@
+ESAU_LIBADD = @ESAU_LIBADD@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FMT_CPPFLAGS = @FMT_CPPFLAGS@
@@ -425,6 +429,7 @@ xena_SOURCES = \
 	ufo_tservice.cc \
 	yet_tservice.cc \
 	cata_tservice.cc \
+	esau_tservice.cc \
 	tservice.cc
 
 xena_CPPFLAGS = -I$(top_srcdir) \
@@ -441,6 +446,7 @@ xena_CPPFLAGS = -I$(top_srcdir) \
 		$(XMAS_CPPFLAGS) \
 		$(UFO_CPPFLAGS) \
 		$(CATA_CPPFLAGS) \
+		$(ESAU_CPPFLAGS) \
 		$(YET_CPPFLAGS)
 
 xena_LDADD = \
@@ -453,6 +459,7 @@ xena_LDADD = \
 	$(XMAS_LIBADD) \
 	$(UFO_LIBADD) \
 	$(CATA_LIBADD) \
+	$(ESAU_LIBADD) \
 	$(YET_LIBADD)
 
 xena_LDFLAGS = $(LIBADD_DL) -Wl,--no-as-needed -pthread -luuid
@@ -468,9 +475,10 @@ noinst_HEADERS = \
 		xtra_tservice.h \
 		ufo_tservice.h \
 		cata_tservice.h \
+		esau_tservice.h \
 		yet_tservice.h
 
-EXTRA_DIST = fema.json rem.json xele.json xone.json nst.json yet.json yd.txt cata.json
+EXTRA_DIST = fema.json rem.json xele.json xone.json nst.json yet.json yd.txt cata.json esau.json
 xenadir = $(bindir)
 xena_DATA = $(EXTRA_DIST)
 all: all-recursive
@@ -568,6 +576,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-cata_tservice.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-esau_tservice.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-foal_tservice.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xena-options.Po@am__quote@
@@ -754,6 +763,20 @@ xena-cata_tservice.obj: cata_tservice.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='cata_tservice.cc' object='xena-cata_tservice.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-cata_tservice.obj `if test -f 'cata_tservice.cc'; then $(CYGPATH_W) 'cata_tservice.cc'; else $(CYGPATH_W) '$(srcdir)/cata_tservice.cc'; fi`
+
+xena-esau_tservice.o: esau_tservice.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-esau_tservice.o -MD -MP -MF $(DEPDIR)/xena-esau_tservice.Tpo -c -o xena-esau_tservice.o `test -f 'esau_tservice.cc' || echo '$(srcdir)/'`esau_tservice.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/xena-esau_tservice.Tpo $(DEPDIR)/xena-esau_tservice.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='esau_tservice.cc' object='xena-esau_tservice.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-esau_tservice.o `test -f 'esau_tservice.cc' || echo '$(srcdir)/'`esau_tservice.cc
+
+xena-esau_tservice.obj: esau_tservice.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-esau_tservice.obj -MD -MP -MF $(DEPDIR)/xena-esau_tservice.Tpo -c -o xena-esau_tservice.obj `if test -f 'esau_tservice.cc'; then $(CYGPATH_W) 'esau_tservice.cc'; else $(CYGPATH_W) '$(srcdir)/esau_tservice.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/xena-esau_tservice.Tpo $(DEPDIR)/xena-esau_tservice.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='esau_tservice.cc' object='xena-esau_tservice.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o xena-esau_tservice.obj `if test -f 'esau_tservice.cc'; then $(CYGPATH_W) 'esau_tservice.cc'; else $(CYGPATH_W) '$(srcdir)/esau_tservice.cc'; fi`
 
 xena-tservice.o: tservice.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(xena_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT xena-tservice.o -MD -MP -MF $(DEPDIR)/xena-tservice.Tpo -c -o xena-tservice.o `test -f 'tservice.cc' || echo '$(srcdir)/'`tservice.cc

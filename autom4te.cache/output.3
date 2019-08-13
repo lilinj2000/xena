@@ -636,6 +636,9 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIB@&t@OBJS
+ESAU_LIBADD
+ESAU_CPPFLAGS
+ESAU_HOME
 CATA_LIBADD
 CATA_CPPFLAGS
 CATA_HOME
@@ -824,6 +827,7 @@ with_xmas
 with_ufo
 with_yet
 with_cata
+with_esau
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1493,6 +1497,7 @@ Optional Packages:
   --with-ufo              home path of the ufo, defaults to @S|@UFO_HOME
   --with-yet              home path of the yet, defaults to @S|@YET_HOME
   --with-cata             home path of the cata, defaults to @S|@CATA_HOME
+  --with-esau             home path of the esau, defaults to @S|@ESAU_HOME
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -15562,6 +15567,21 @@ fi
 
 CATA_CPPFLAGS="-I$CATA_HOME/include"
 CATA_LIBADD="$CATA_HOME/lib/libcata_trader.la"
+
+
+
+ESAU_HOME=$home_libs/esau
+
+@%:@ Check whether --with-esau was given.
+if test "${with_esau+set}" = set; then :
+  withval=$with_esau; ESAU_HOME="$withval"
+else
+  ESAU_HOME="$ESAU_HOME"
+fi
+
+
+ESAU_CPPFLAGS="-I$ESAU_HOME/include"
+ESAU_LIBADD="$ESAU_HOME/lib/libesau.la"
 
 
 

@@ -11,6 +11,7 @@ home_xspeed=$home_3rd/XOne_api_v1.5.3.4/XSpeed/libs/linux64_api
 home_nst=$home_3rd/NSTAPI-BL2018-20180914-V1
 home_ctp=$home_3rd/v6.3.15_20190220_api_tradeapi_se_linux64
 home_yd=$home_3rd/20190629_yd.client/yd.client/linux/
+home_es=$home_3rd/TapAPI_20190606_V9/esapi/
 
 
 LD_LIBRARY_PATH=$home_boost/lib:$home_fmt/lib
@@ -22,6 +23,7 @@ LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$home_xspeed
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$home_ctp
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$home_nst/lib
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$home_yd
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$home_es/lib/linux
 
 export LD_LIBRARY_PATH
 

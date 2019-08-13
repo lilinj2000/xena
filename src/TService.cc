@@ -35,6 +35,7 @@
 #include "src/ufo_tservice.h"
 #include "src/xmas_tservice.h"
 #include "src/xtra_tservice.h"
+#include "src/esau_tservice.h"
 #include "src/yet_tservice.h"
 
 namespace xena {
@@ -55,6 +56,8 @@ TService *TService::create(const rapidjson::Document &doc,
     return new YetTService(doc, callback);
   } else if (doc.HasMember("cata_trader")) {
     return new CataTService(doc, callback);
+  } else if (doc.HasMember("esau")) {
+    return new EsauTService(doc, callback);
   } else {
     throw std::runtime_error("no supported TService!!!");
   }

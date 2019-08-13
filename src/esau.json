@@ -1,0 +1,43 @@
+{
+    "esau": {
+        "app_id": "client_test_1", 
+        "auth_code": "TEST", 
+        "exchange_no": "ZCE", 
+        "log_level": "3", 
+        "log_path": "./", 
+        "password": "123456", 
+        "svr_ip": "116.246.25.180", 
+        "svr_port": 6666, 
+        "user_no": "04452"
+    },  
+    "log": {
+        "level": "trace", 
+        "sinks": [
+            {
+                "sink": {
+                    "level": "trace", 
+                    "type": "stdout_sink_mt"
+                }
+            }, 
+            {
+                "sink": {
+                    "file_name": "xena.log", 
+                    "level": "info", 
+                    "max_file_size": 5000000, 
+                    "max_files": 10, 
+                    "type": "rotating_file_sink_mt"
+                }
+            }
+        ]
+    }, 
+    "xena": {
+        "count": 1, 
+        "data_file": "xena_data.txt", 
+        "instru": "SR911", 
+        "interval": 2000, 
+        "price": 6800, 
+        "ts_flag": 1,
+        "fok": false, 
+        "volume": 2
+    }
+}
